@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="E:\Tmall\bootstrap-3.3.7-dist\css\bootstrap.min.css" rel="stylesheet">
+    <script src="E:\Tmall\bootstrap-3.3.7-dist\js\bootstrap.min.js"></script>
+</head>
+<style>
+    /* 页脚一设置 */
+    div.footer{
+        margin: 0px 0px;
+        border-top-style: solid;/*上边框样式 实线*/
+        border-top-width: 1px;
+        border-top-color: #e7e7e7;
+    }
+    /* 上方图片 */
+    div.footer_ensure{
+        margin-top: 24px;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+    /* 下方 */
+    div.footer_desc{
+        border-top-style: solid;
+        border-top-width: 1px;
+        border-top-color: #e7e7e7;
+        padding-top: 30px;
+        margin: 0px 20px 0px 20px;
+    }
+    /* 下方每一个区域块 */
+    div.footer_desc div.descColumn{
+        width: 20%;
+        float: left;
+        padding-left: 15px;
+    }
+    /* 区域快名字 */
+    div.footer_desc div.descColumn span.descColumnTitle{
+        font-size: 16px;
+        font-weight: bold;
+        color: #646464;
+    }
+    /* 区域块超链设置 */
+    div.footer_desc a{
+        display: block;/*超链默认是inline的，block可以自动换行*/
+        padding-top: 3px;
+    }
+    /* 全局 */
+    body{
+        font-size: 12px;
+        font-family: Arial;
+    }
+    /* 超链颜色 */
+    a{
+        color: #999;
+    }
+    /* 超链悬停 */
+    a:hover{
+        color: #C40000;
+        text-decoration: none;
+    }
+</style>
+<div style="display: block" class="footer" id="footer">
+    <div class="footer_ensure" id="footer_ensure">
+        <a href="#"><img src="../pic/site/ensure.png"></a>
+    </div>
+    <div class="footer_desc" id="footer_desc">
+        <div class="descColumn">
+            <span class="descColumnTitle">购物指南</span>
+            <a href="#">免费注册</a>
+            <a href="#">开通支付宝</a>
+            <a href="#">支付宝充值</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">天猫保障</span>
+            <a href="#">发票保障</a>
+            <a href="#">售后规则</a>
+            <a href="#">缺货赔付</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">支付方式</span>
+            <a href="#">快捷支付</a>
+            <a href="#">信用卡</a>
+            <a href="#">蚂蚁花呗</a>
+            <a href="#">货到付款</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">商家服务</span>
+            <a href="#">商家入驻</a>
+            <a href="#">商家中心</a>
+            <a href="#">天猫智库</a>
+            <a href="#">天猫规则</a>
+            <a href="#">物流服务</a>
+            <a href="#">喵言喵语</a>
+            <a href="#">运营服务</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">手机天猫</span>
+            <a href="#"><img src="../pic/site/ma.png"></a>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</div>
+</html>

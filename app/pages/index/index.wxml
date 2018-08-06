@@ -1,13 +1,11 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class='weather-wrapper'>
+  <view class="tempture">{{nowTempture}}</view>
+  <view class='weather'>{{nowWeather}}</view>
+  <image class='weather-bg' src='{{nowWeatherBackground}}'></image>
 </view>
+<view class='timeTips'>
+  <image class='timePic' src='../../img/time-icon.png'></image>
+  <view class='timeText'> 未来24小时天气预报</view>
+</view>
+
+<view wx:for='{{[1,2,3,4,5]}}'>{{item}}</view>

@@ -2,10 +2,26 @@
   <view class="tempture">{{nowTempture}}</view>
   <view class='weather'>{{nowWeather}}</view>
   <image class='weather-bg' src='{{nowWeatherBackground}}'></image>
+
+  <!-- 下面的详细天气横栏 -->
+  <view class='day-weather' bindtap='onTapDayWeather'>
+    <view class='day-text'>{{todayDate}}</view>
+    <view class='temp-text'>{{todayTemp}}</view>
+    <image class='arrow-icon' src='../../img/arrow.png'></image>
+  </view>
+
 </view>
 <view class='timeTips'>
   <image class='timePic' src='../../img/time-icon.png'></image>
   <view class='timeText'> 未来24小时天气预报</view>
 </view>
 
-<view wx:for='{{[1,2,3,4,5]}}'>{{item}}</view>
+<scroll-view scroll-x>
+  <view class='forecast-list'>
+    <view class="forecast-item" wx:for="{{hourlyWeather}}">
+      <view class='forecast-time'>{{item.time}}</view>
+      <image class='forecast-weather' src='{{item.iconPath}}'></image>
+      <view class='forecast-temp'>{{item.temp}}</view>
+    </view>
+  </view>
+</scroll-view> 

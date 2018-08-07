@@ -1,3 +1,5 @@
+
+/* 当前天气的基本样式 */
 .weather-wrapper {
   padding-top: 174rpx;
   padding-bottom: 250rpx;
@@ -28,11 +30,39 @@
   z-index: -1;
 }
 
+
+/* 当天详细天气的样式 */
+.day-weather {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom:0;
+  left: 40rpx;
+  right: 40rpx;
+  height: 90rpx;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: rgba(0, 0, 0, 0.6)
+}
+ .temp-text {
+  flex-grow: 1;
+  padding-right: 30rpx;
+  text-align: right;
+}
+ .arrow-icon {
+  width: 13rpx;
+  height: 24rpx;
+}
+
+
+/* 未来二十四小时天气预报的样式 */
 .timeTips {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 40rpx;
+  margin-bottom: 40rpx;
 }
 
 .timePic {
@@ -45,4 +75,34 @@
   font-size: 30rpx;
   line-height: 42rpx;
   opacity: 0.5;
+}
+
+/* 这里是未来几小时天气列表的样式 */
+.forecast-list {
+    display:flex;
+}
+
+ .forecast-item {
+    display:flex;
+    width: 120rpx;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forecast-time {
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.forecast-weather {
+  margin-top: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.forecast-temp {
+  margin-top: 46rpx;
+  font-size: 40rpx;
+  line-height: 56rpx;
 }

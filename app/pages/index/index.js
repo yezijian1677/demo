@@ -120,7 +120,9 @@ Page({
 
   //详细天气绑定的函数
   onTapDayWeather(){
-    wx.showToast()
+    wx.navigateTo({
+      url: '/pages/list/list',
+    })
   }
  
 })

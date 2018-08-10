@@ -1,3 +1,4 @@
+
 //天气对应表
 const weatherMap = {
   'sunny' : '晴天',
@@ -17,6 +18,11 @@ const weatherColorMap = {
   'lightrain': '#CBEAFD',
   'snow': '#aae1fc'
 }
+
+//百度地图
+const bmap = require('../../libs/bmap-wx.js');
+var wxMarkerData = []; 
+
 Page({
   data: {
     nowTempture: '14℃',
@@ -25,6 +31,7 @@ Page({
     hourlyWeather: [],
     todayTemp: ``,
     todayDate: ``,
+    city: '',
     
   },
   onPullDownRefresh(){
@@ -123,6 +130,16 @@ Page({
     wx.navigateTo({
       url: '/pages/list/list',
     })
-  }
+  },
+
+
+
+  //获取位置
+  onTapGetLocation(){
+
+
+  },
+
+
  
 })

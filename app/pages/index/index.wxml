@@ -1,4 +1,16 @@
 <view class='weather-wrapper'>
+
+<!-- 地理位置信息视图 -->
+  <view class='location-wrapper'>
+    <view class='location'>
+      <image src='../../img/location-icon.png' class='location-icon'></image>
+      <view class='location-text'>{{city}}</view>
+    </view>
+    <view class='location-tips' bindtap='onTapGetLocation'>点击获取当前位置</view>
+  </view>
+
+
+  <!-- 当前温度视图 -->
   <view class="tempture">{{nowTempture}}</view>
   <view class='weather'>{{nowWeather}}</view>
   <image class='weather-bg' src='{{nowWeatherBackground}}'></image>

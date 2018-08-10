@@ -1,11 +1,44 @@
 
-/* 当前天气的基本样式 */
+
 .weather-wrapper {
-  padding-top: 174rpx;
+  padding-top: 20rpx;
   padding-bottom: 250rpx;
   position: relative;
 }
 
+/* 定位样式 */
+.location-wrapper {
+  margin-bottom: 60rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-icon {
+  width: 21rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.location-text {
+  opacity: 0.5;
+}
+
+.location-tips {
+  display: flex;
+  justify-content: center;
+  opacity: 0.6;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+
+/* 当前天气的基本样式 */
 .tempture {
   margin-top: 30rpx;
   text-align: center;

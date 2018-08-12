@@ -64,6 +64,7 @@ Page({
   onLoad(){
     this.getNow();
   },
+  
 
   //页面信息
   getNow(callback){

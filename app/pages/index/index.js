@@ -40,6 +40,7 @@ Page({
     todayTemp: ``,
     todayDate: ``,
 
+
     //状态码
     locationAuthType: UNPROMPTED,
     locationTipsText: UNPROMPTED_TIPS,

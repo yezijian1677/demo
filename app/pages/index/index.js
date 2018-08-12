@@ -1,22 +1,34 @@
 
 //天气对应表
 const weatherMap = {
-  'sunny' : '晴天',
-  'cloudy' : '多云',
-  'overcast' : '阴',
-  'lightrain' : '小雨',
-  'heavyrain' : '大雨',
-  'snow' : '雪'
+  '晴': 'sunny',
+  '多云': 'cloudy',
+  '阴': 'overcast',
+  '少云': 'overcast',
+  '小雨': 'lightrain',
+  '雷阵雨': 'lightrain',
+  '阵雨': 'lightrain',
+  '大雨': 'heavyrain',
+  '暴雨': 'heavyrain',
+  '中雨': 'heavyrain',
+  '雨': 'lightrain',
+  '雪': 'snow'
 }
 
 //导航栏颜色对应表
 const weatherColorMap = {
-  'sunny': '#cbeefd',
-  'cloudy': '#deeef6',
-  'overcast': '#c6ced2',
-  'heavyrain': '#c5ccd0',
-  'lightrain': '#CBEAFD',
-  'snow': '#aae1fc'
+  '晴': '#c4efff',
+  '多云': '#deeef6',
+  '阴': '#c6ced2',
+  '少云': '#c6ced2',
+  '雷阵雨': '#CBEAFD',
+  '阵雨': '#CBEAFD',
+  '大雨': '#c5ccd0',
+  '暴雨': '#c5ccd0',
+  '中雨': '#c5ccd0',
+  '小雨': '#CBEAFD',
+  '雨': '#CBEAFD',
+  '雪': '#aae1fc'
 }
 
 const UNPROMPTED = 0;
@@ -54,26 +66,26 @@ Page({
     weatherData: '',
     futureWeather: []
 
-    
+
   },
-  onPullDownRefresh(){
-    this.getNow(()=>{
+  onPullDownRefresh() {
+    this.getNow(() => {
       wx.stopPullDownRefresh()
     })
   },
-  onLoad(){
+  onLoad() {
     this.getNow();
   },
-  
+
 
   //页面信息
-  getNow(callback){
+  getNow(callback) {
     wx.request({
-      url: 'https://test-miniprogram.com/api/weather/now', //仅为示例，并非真实的接口地址
+      url: 'http://aider.meizu.com/app/weather/listWeather?cityIds=101280601',
 
 
       data: {
-        city: this.data.city,
+        // city: this.data.city,
       },
 
 
@@ -83,31 +95,31 @@ Page({
 
 
       success: res => {
-        let result = res.data.result;
+        let result = res.data.value[0];
         this.setNow(result)
         this.setHourlyWeather(result)
         this.setToday(result)
       },
-      
+
 
       //结束刷新
-      complete: ()=>{
-          callback && callback()
+      complete: () => {
+        callback && callback()
       }
-      
+
 
 
     })
   },
-  
+
   //设置当前温度以及背景图片之类的
-  setNow(result){
-    let temp = result.now.temp;
-    let weather = result.now.weather;
+  setNow(result) {
+    let temp = result.realtime.temp;
+    let weather = result.realtime.weather;
     this.setData({
       nowTempture: temp + '℃',
-      nowWeather: weatherMap[weather],
-      nowWeatherBackground: '../../img/' + weather + '-bg.png'
+      nowWeather: weather,
+      nowWeatherBackground: '../../img/' + weatherMap[weather] + '-bg.png'
     })
     wx.setNavigationBarColor({
       frontColor: '#000000',
@@ -116,19 +128,19 @@ Page({
   },
 
   //设置未来几小时的天气情况
-  setHourlyWeather(result){
+  setHourlyWeather(result) {
     //设置每小时天气部分
 
     let hourlyWeather = [] //每小时天气
-    let forecast = result.forecast //获取的天气
+    let forecast = result.weatherDetailsInfo.weather3HoursDetailsInfos //获取的天气
     let nowHour = new Date().getHours() //当前时间
 
     //循环整一天间隔三小时的天气
-    for (let i = 0; i < 8; i += 1) {
+    for (let i = 0; i < 7; i += 1) {
       hourlyWeather.push({
-        time: (i*3 + nowHour) % 24 + "时",
-        iconPath: '../../img/' + forecast[i].weather + '-icon.png',
-        temp: forecast[i].temp + '°'
+        time: (i * 3 + nowHour) % 24 + "时",
+        iconPath: '../../img/' + weatherMap[forecast[i].weather] + '-icon.png',
+        temp: forecast[i].highestTemperature + '°'
 
       })
     }
@@ -140,99 +152,67 @@ Page({
   },
 
   //当前天气详情
-  setToday(result){
+  setToday(result) {
     let date = new Date()
     this.setData({
-      todayTemp: `${result.today.minTemp}° - ${result.today.maxTemp}°`,
+      todayTemp: `${result.weathers[0].temp_night_c}° - ${result.weathers[0].temp_day_c}°`,
       todayDate: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 今天`
     })
   },
 
   //详细天气绑定的函数
-  onTapDayWeather(){
+  onTapDayWeather() {
     wx.navigateTo({
-      url: '/pages/list/list?city='+this.data.city,
+      url: '/pages/list/list?city=',
     })
   },
 
 
 
   //点击获取位置绑定的函数
-  onTapGetLocation(){
+  onTapGetLocation() {
     this.getLocation();
     this.getWeather();
   },
 
-//获取位置
- getLocation(){
-   var that = this;
-   var BMap = new bmap.BMapWX({
-     ak: 'RQLK8Y2O4WMZsQyzUmxEPZGRG4c0ez9v'
-   });
-
-   //微信获取经纬度，百度逆解析
-   wx.getLocation({
-     type: 'wgs84',
-     //成功后的回调函数
-     success: res => {
-
-       this.setData({
-         locationAuthType: UNAUTHORIZED,
-         locationTipsText: UNAUTHORIZED_TIPS
-       })
-
-       that.setData({
-         latitude: res.latitude,
-         longitude: res.longitude
-       })
-
-       BMap.regeocoding({
-         location: that.data.latitude + ',' + that.data.longitude,
-         success: res => {
-           that.setData({
-             city: res.originalData.result.addressComponent.city
-           })
-           this.getNow();
-         },
-         fail: () => {
-           locationAuthType: UNAUTHORIZED;
-           locationTipsText: UNAUTHORIZED_TIPS;
-         }
-       })
-     },
-   })
- },
-
-
-getWeather(){
-  var that = this;
-  // 新建bmap对象 
-  var BMap = new bmap.BMapWX({
-    ak: 'RQLK8Y2O4WMZsQyzUmxEPZGRG4c0ez9v'
-  });
-  var fail = data => {
-    console.log(data);
-  };
-  var success = data => {
-    console.log(data);
-
-    var weatherData = data.currentWeather[0];
-    var futureWeather = data.originalData.results[0].weather_data;
-    console.log(futureWeather);
-    // weatherData = '城市：' + weatherData.currentCity + '\n' + 'PM2.5：' + weatherData.pm25 + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n' + '风力：' + weatherData.wind + '\n';
-    that.setData({
-      weatherData: weatherData,
-      futureWeather: futureWeather
+  //获取位置
+  getLocation() {
+    var that = this;
+    var BMap = new bmap.BMapWX({
+      ak: 'RQLK8Y2O4WMZsQyzUmxEPZGRG4c0ez9v'
     });
-  }
 
-  // 发起weather请求 
-  BMap.weather({
-    fail: fail,
-    success: success
-  }); 
+    //微信获取经纬度，百度逆解析
+    wx.getLocation({
+      type: 'wgs84',
+      //成功后的回调函数
+      success: res => {
 
-}
+        this.setData({
+          locationAuthType: UNAUTHORIZED,
+          locationTipsText: UNAUTHORIZED_TIPS
+        })
 
- 
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+
+        BMap.regeocoding({
+          location: that.data.latitude + ',' + that.data.longitude,
+          success: res => {
+            that.setData({
+              city: res.originalData.result.addressComponent.city
+            })
+            this.getNow();
+          },
+          fail: () => {
+            locationAuthType: UNAUTHORIZED;
+            locationTipsText: UNAUTHORIZED_TIPS;
+          }
+        })
+      },
+    })
+  },
+
 })

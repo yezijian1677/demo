@@ -61,6 +61,7 @@ Page({
     latitude: 0,
     longitude: 0,
     city: '',
+    cityIds: '',
 
     //百度天气
     weatherData: '',
@@ -74,7 +75,10 @@ Page({
     })
   },
   onLoad() {
+    this.getLocation();
+    this.getCity();
     this.getNow();
+    
   },
 
 
@@ -172,7 +176,6 @@ Page({
   //点击获取位置绑定的函数
   onTapGetLocation() {
     this.getLocation();
-    this.getWeather();
   },
 
   //获取位置
@@ -215,4 +218,22 @@ Page({
     })
   },
 
+
+getCity(){
+  
+  var citys = this.data.city;
+  var cityjson = require("../../json/city.js");
+  var cities = cityjson.cityList;
+  // console.log(cities[0].city);
+
+  for(var i=0; i<cities.length;i++){
+    if(citys===cities[i].city){
+      this.setData({
+        cityIds: cities[i].cityid
+      })
+      console.log(cities[i].cityid);
+    }
+
+  }
+}
 })

@@ -27,6 +27,7 @@ const weatherColorMap = {
   '暴雨': '#c5ccd0',
   '中雨': '#c5ccd0',
   '小雨': '#CBEAFD',
+  '雨': '#CBEAFD',
   '雪': '#aae1fc'
 }
 

@@ -34,11 +34,11 @@ const weatherColorMap = {
 Page({
   date: {
     weekWeather: [],
-    city: ''
+    cityIds: '101010100',
   },
   onLoad(options) {
     this.setData({
-      city: options.city
+      cityIds: options.cityIds
     })
     this.getWeekWeather()
     
@@ -50,10 +50,10 @@ Page({
   },
   getWeekWeather(callback) {
     wx.request({
-      url: 'http://aider.meizu.com/app/weather/listWeather?cityIds=101280601',
+      url: 'http://aider.meizu.com/app/weather/listWeather',
       data: {
         // time: new Date().getTime(),
-        // city: this.data.city
+        cityIds: this.data.cityIds
       },
       success: res => {
         let result = res.data.value[0];

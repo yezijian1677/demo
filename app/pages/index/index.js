@@ -1,4 +1,3 @@
-
 //天气对应表
 const weatherMap = {
   '晴': 'sunny',
@@ -60,8 +59,8 @@ Page({
     //百度地图数据
     latitude: 0,
     longitude: 0,
-    city: '',
-    cityIds: '',
+    city: '北京市',
+    cityIds: '101010100',
 
     //百度天气
     weatherData: '',
@@ -79,17 +78,19 @@ Page({
     this.getCity();
     this.getNow();
     
+
   },
 
 
   //页面信息
+  //?cityIds=101280601 ?cityIds=101290101
   getNow(callback) {
     wx.request({
-      url: 'http://aider.meizu.com/app/weather/listWeather?cityIds=101280601',
+      url: 'http://aider.meizu.com/app/weather/listWeather',
 
 
       data: {
-        // city: this.data.city,
+           cityIds: this.data.cityIds,
       },
 
 
@@ -167,7 +168,7 @@ Page({
   //详细天气绑定的函数
   onTapDayWeather() {
     wx.navigateTo({
-      url: '/pages/list/list?city=',
+      url: '/pages/list/list?cityIds=' + this.data.cityIds
     })
   },
 
@@ -180,7 +181,7 @@ Page({
 
   //获取位置
   getLocation() {
-    var that = this;
+
     var BMap = new bmap.BMapWX({
       ak: 'RQLK8Y2O4WMZsQyzUmxEPZGRG4c0ez9v'
     });
@@ -196,16 +197,17 @@ Page({
           locationTipsText: UNAUTHORIZED_TIPS
         })
 
-        that.setData({
+        this.setData({
           latitude: res.latitude,
           longitude: res.longitude
         })
 
         BMap.regeocoding({
-          location: that.data.latitude + ',' + that.data.longitude,
+          location: this.data.latitude + ',' + this.data.longitude,
           success: res => {
-            that.setData({
-              city: res.originalData.result.addressComponent.city
+            let city = res.originalData.result.addressComponent.city;
+            this.setData({
+              city: city
             })
             this.getNow();
           },
@@ -218,22 +220,56 @@ Page({
     })
   },
 
+  getCityId(city) {
+
+    var cityjson = require("../../json/city.js");
+    var cities = cityjson.cityList;
+    // console.log(cities[0].city);
+
+    for (var i = 0; i < cities.length; i++) {
+      if (city === cities[i].city+"市") {
+        this.setData({
+          cityIds: cities[i].cityid
+        })
+        // console.log(cities[i].cityid);
+      }
+
+    }
+  },
+
+
+//获取城市地址
 
 getCity(){
-  
-  var citys = this.data.city;
-  var cityjson = require("../../json/city.js");
-  var cities = cityjson.cityList;
-  // console.log(cities[0].city);
+  var BMap = new bmap.BMapWX({
+    ak: 'RQLK8Y2O4WMZsQyzUmxEPZGRG4c0ez9v'
+  });
 
-  for(var i=0; i<cities.length;i++){
-    if(citys===cities[i].city){
+  //微信获取经纬度，百度逆解析
+  wx.getLocation({
+    type: 'wgs84',
+    //成功后的回调函数
+    success: res => {
       this.setData({
-        cityIds: cities[i].cityid
+        latitude: res.latitude,
+        longitude: res.longitude
       })
-      console.log(cities[i].cityid);
-    }
 
-  }
-}
+      BMap.regeocoding({
+        location: this.data.latitude + ',' + this.data.longitude,
+        success: res => { 
+          var city = res.originalData.result.addressComponent.city;
+          console.log(city);
+          this.getCityId(city);
+          this.getNow();
+        },
+      })
+
+    },
+  })
+
+
+},
+
+
 })

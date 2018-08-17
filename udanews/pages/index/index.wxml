@@ -1,0 +1,45 @@
+<view class='navigator-wrapper'>
+  <view class='navigator navigator1'>国内</view>
+  <view class='navigator'>国际</view>
+  <view class='navigator'>财经</view>
+  <view class='navigator'>娱乐</view>
+  <view class='navigator'>军事</view>
+  <view class='navigator'>体育</view>
+  <view class='navigator'>其他</view>
+</view>
+
+<!-- //首页图片导航 -->
+<view class='navigator-img'>
+
+<!-- //背景图 透明度0.1 -->
+<view class='news-img-opc'style="background-image: url('{{ImageUrl}}')"></view>
+<!-- //新闻图片 -->
+<view class='news-img'>
+  <image class='img' src='{{ImageUrl}}'></image>
+</view>
+<!-- //新闻标题等 -->
+<view class='news-text'>
+  <view class='title'>{{title}}</view>
+  <view class='dateAndSource'>
+    <view class='source'>{{source}}</view>
+    <view class='date'>{{date1}}</view>
+  </view>
+</view>
+ 
+</view>
+
+<view class='navigator-small' wx:for='{{item}}'>
+  <!-- //小新闻的title -->
+  <view class='item-text'>
+    <view class='item-title'>{{item.title}}</view>
+    <view class='twoTips'>
+      <view class='item-source'>{{item.source}}</view>
+      <view class='item-date'>{{item.date}}</view>
+    </view>
+  </view>
+
+  <!-- //小新闻图片 -->
+  <view class='item-img'>
+    <image class='item-small-img' src='{{item.ImageUrl}}' mode='aspectFill' style='width:220rpx;height:126rpx;'></image>
+  </view>
+</view>

@@ -1,0 +1,20 @@
+<!-- 标题头 -->
+<view class='header'>
+  <view class='header-title'>{{title}}</view>
+  <view class='header-bottom'>
+    <view class='bottom-source'>{{source}}</view>
+    <view class='bottom-date'>{{date}}</view>
+    <view class='bottom-record'>阅读 {{readCount}}</view>
+  </view>
+</view>
+
+<!-- 内容 -->
+<view class='content'>
+  <view class='for-content' wx:for='{{content}}'>
+    <view class='content-p' wx:if='{{item.type1===1}}'>{{item.text}}</view>
+    <view class='content-strong' wx:if='{{item.type1===2}}'>{{item.text}}</view>
+    <view class='content-image' wx:if='{{item.type1===3}}'>
+      <image src='{{item.src}}' mode='scaleToFill' style='width:700rpx; height:525'></image>
+    </view>
+  </view>
+</view>

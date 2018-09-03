@@ -1,0 +1,61 @@
+/* pages/content/content.wxss */
+
+.header {
+  height: 220rpx;
+  border-top: 1rpx solid #35a2e4;
+}
+.header-title{
+  opacity: 0.9;
+  padding-top: 40rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  height: 120rpx;
+  font-size: 42rpx;
+  font-family: '微软雅黑',
+}
+.header-bottom {
+  padding-top: 20rpx;
+  opacity: 0.7;
+  font-family: '微软雅黑';
+  display: flex;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.bottom-source {
+  width: 140rpx;
+  margin-right: 40rpx;
+  font-size: 28rpx;
+}
+.bottom-date {
+  font-size: 28rpx;
+  margin-right: 320rpx;
+}
+.bottom-record {
+  font-size: 28rpx;
+}
+
+/* content部分的css */
+.content {
+  font-size: 32rpx;
+  line-height: 50rpx;
+  font-family: '微软雅黑';
+  margin-top: 80rpx;
+}
+.content-p, .content-strong {
+  opacity: 0.9;
+  width: 700rpx;
+  margin-right: 25rpx;
+  margin-left: 25rpx;
+  margin-bottom: 30rpx;
+}
+
+.content-strong {
+  font-weight: bolder;
+}
+
+.content-image {
+  margin-top: 42rpx;
+  margin-bottom: 42rpx;
+  margin-right: 25rpx;
+  margin-left: 25rpx;
+}

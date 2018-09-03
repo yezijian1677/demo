@@ -15,6 +15,11 @@
 .navigator1 {
   margin-left: 30rpx;
 }
+
+.navigator:hover, .navigator1:hover {
+  font-size: 33rpx;
+}
+
 .news-img-opc {
   position: relative;
   opacity: 0.1;
@@ -43,8 +48,8 @@
   display: flex;
 }
 .title {
- font-size: 30rpx;
- color: #f2efec;
+ font-size: 32rpx;
+ color: white;
  line-height: 55rpx;
  font-family: '微软雅黑';
  font-weight: 600;

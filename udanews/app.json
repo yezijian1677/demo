@@ -1,12 +1,13 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/content/content"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#35a2e4",
     "navigationBarTitleText": "资讯·快读",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

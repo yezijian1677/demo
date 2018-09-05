@@ -1,13 +1,7 @@
 
 <view class='navigator-wrapper'>
 
-  <view class='navigator navigator1' data-pos='gn' bindtap='switchItem'>国内</view>
-  <view class='navigator' data-pos='gj' bindtap='switchItem'>国际</view>
-  <view class='navigator' data-pos='cj' bindtap='switchItem'>财经</view>
-  <view class='navigator' data-pos='yl' bindtap='switchItem'>娱乐</view>
-  <view class='navigator' data-pos='js' bindtap='switchItem'>军事</view>
-  <view class='navigator' data-pos='ty' bindtap='switchItem'>体育</view>
-  <view class='navigator' data-pos='other' bindtap='switchItem'>其他</view>
+  <view class='navigator' wx:for='{{typeArray}}' data-pos='{{dataPosType[index].type}}' bindtap='switchItem'>{{item.typeMsg}}</view>
 
 </view>
 
@@ -19,13 +13,27 @@
 <view class='news-img-opc'style="background-image: url('{{ImageUrl}}')"></view>
 <!-- //新闻图片 -->
 <view class='news-img'>
-  <image class='img' src='{{ImageUrl}}'></image>
+
+<!-- 修改后添加了一个默认图片 -->
+  <block wx:if='{{ImageUrl.length!=0}}'>
+    <image class='img' src='{{ImageUrl}}'></image>
+  </block>
+  <block wx:else>
+    <view class='img' src='{{defaultImage}}'></view>
+  </block>
 </view>
+
 <!-- //新闻标题等 -->
 <view class='news-text'>
   <view class='title'>{{title}}</view>
   <view class='dateAndSource'>
-    <view class='source'>{{source}}</view>
+    <!-- 添加一个默认来源 -->
+    <block wx:if='{{source.length!=0}}'>
+      <view class='source'>{{source}}</view>
+    </block>
+    <block wx:else>
+      <view class='source'>资讯快读</view>
+    </block>
     <view class='date'>{{date1}}</view>
   </view>
 </view>
@@ -37,7 +45,13 @@
   <view class='item-text'>
     <view class='item-title'>{{item.title}}</view>
     <view class='twoTips'>
-      <view class='item-source'>{{item.source}}</view>
+    <!-- 添加默认来源- -->
+      <block wx:if='{{item.source.length!=0}}'>
+        <view class='item-source'>{{item.source}}</view>
+      </block>
+      <block wx:else>
+        <view class='item-source'>资讯快读</view>
+      </block>
       <view class='item-date'>{{item.date}}</view>
     </view>
   </view>

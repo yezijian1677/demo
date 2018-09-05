@@ -8,12 +8,10 @@
 .navigator {
   font-family: '微软雅黑';
   font-weight: 600;
-  padding-right: 40rpx;
+  padding-left: 22rpx;
+  padding-right: 22rpx;
   color: white;
   font-size: 30rpx;
-}
-.navigator1 {
-  margin-left: 30rpx;
 }
 
 .navigator:hover, .navigator1:hover {

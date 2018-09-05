@@ -2,6 +2,26 @@ Page({
 
   data:{
     //首页图片的元素
+    typeArray: [
+      { typeMsg: '国内' },
+      { typeMsg: '国际' },
+      { typeMsg: '财经' },
+      { typeMsg: '娱乐' },
+      { typeMsg: '军事' },
+      { typeMsg: '体育' },
+      { typeMsg: '其他' },
+    ],
+
+    dataPosType:[
+      { type: 'gn' },
+      { type: 'gj' },
+      { type: 'cj' },
+      { type: 'yl' },
+      { type: 'js' },
+      { type: 'ty' },
+      { type: 'other' },
+    ],
+
     ImageUrl: '',
     title: '',
     date1: '',
@@ -20,7 +40,12 @@ Page({
 
 //获取页面
   getIndex(){
+
+    wx.showLoading({
+      title: '资讯正在加载中',
+    });
     wx.request({
+
       url: 'https://test-miniprogram.com/api/news/list',
 
 
@@ -39,6 +64,10 @@ Page({
         this.setPic(result);
         this.setItem(result);
       },
+
+      complete: ()=> {
+        wx.hideLoading();
+      }
     })
 
   },
@@ -71,6 +100,7 @@ Page({
         date: result[i].date.substring(11,16),
         source: result[i].source,
         ImageUrl: result[i].firstImage,
+        defaultImage: result[i].firstImage,
       })
       this.setData({
         item: item,
@@ -84,40 +114,13 @@ Page({
     console.log(e.currentTarget)
     let type = e.currentTarget.dataset.pos;
     console.log(type);
-    if(type==='gj'){
-      this.setData({
-        type: type
-      })
-    }
-    if (type === 'gn') {
-      this.setData({
-        type: type
-      })
-    }
-    if (type === 'cj') {
-      this.setData({
-        type: type
-      })
-    }
-    if (type === 'yl') {
-      this.setData({
-        type: type
-      })
-    }
-    if (type === 'js') {
-      this.setData({
-        type: type
-      })
-    }
-    if (type === 'ty') {
-      this.setData({
-        type: type
-      })
-    }
-    if (type === 'other') {
-      this.setData({
-        type: type
-      })
+    let typeList = ['gj','gn','cj','yl','js','ty','other'];
+    for(let i=0;i<typeList.length;i++){
+      if(type===typeList[i]){
+        this.setData({
+          type: typeList[i]
+        })
+      }
     }
     this.getIndex();
   },

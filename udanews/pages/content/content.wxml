@@ -11,10 +11,10 @@
 <!-- 内容 -->
 <view class='content'>
   <view class='for-content' wx:for='{{content}}'>
-    <view class='content-p' wx:if='{{item.type1===1}}'>{{item.text}}</view>
-    <view class='content-strong' wx:if='{{item.type1===2}}'>{{item.text}}</view>
-    <view class='content-image' wx:if='{{item.type1===3}}'>
-      <image src='{{item.src}}' mode='scaleToFill' style='width:700rpx; height:525'></image>
+    <view class='content-p' wx:if='{{mesType[item.type]===1}}'>{{item.text}}</view>
+    <view class='content-strong' wx:if='{{mesType[item.type]===2}}'>{{item.text}}</view>
+    <view class='content-image' wx:if='{{mesType[item.type]===3}}'>
+      <image src='{{!!item.src ? item.src:defaultImage}}' mode='scaleToFill' style='width:700rpx; height:525'></image>
     </view>
   </view>
 </view>

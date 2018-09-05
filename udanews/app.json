@@ -5,7 +5,7 @@
     "pages/content/content"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#35a2e4",
     "navigationBarTitleText": "资讯·快读",
     "navigationBarTextStyle": "white"

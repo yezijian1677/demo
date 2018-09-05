@@ -8,14 +8,14 @@ const mesType = {
 Page({
 
   data: {
+   mesType,
    id: 1523074607642,
    title: '',
    date: '',
    source: '',
    firstImage: '',
    readCount: 0,
-
-  content: [],
+   content: [],
   },
 
   /**
@@ -80,29 +80,11 @@ Page({
 
 //显示content页面的内容，并用上方的map匹配好每个content的类型，便于判别
   getContent(result){
-    let content = [];
+    
     let SourceContent = result.content;
-    console.log(mesType[SourceContent[1].type]);
-    for(let i=0; i<SourceContent.length; i++){
-
-      if(mesType[SourceContent[i].type]===3){
-        content.push({
-          type1: mesType[SourceContent[i].type],
-          src: SourceContent[i].src,
-          id: SourceContent[i].id,
-        });
-      }
-      else{
-        content.push({
-          type1: mesType[SourceContent[i].type],
-          text: SourceContent[i].text,
-          id: SourceContent[i].id,
-        });
-      }
-      this.setData({
-        content: content
-      })
-    }
+    this.setData({
+      content: SourceContent
+    })
   },
 
   

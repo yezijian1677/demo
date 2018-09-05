@@ -1,7 +1,7 @@
 
 <view class='navigator-wrapper'>
 
-  <view class='navigator' wx:for='{{typeArray}}' data-pos='{{dataPosType[index].type}}' bindtap='switchItem'>{{item.typeMsg}}</view>
+  <view class='navigator' wx:for='{{categories}}' data-pos='{{categories[index]}}' bindtap='switchItem'>{{catNameMap[categories[index]]}}</view>
 
 </view>
 
@@ -10,17 +10,16 @@
 <view class='navigator-img'>
 
 <!-- //背景图 透明度0.1 -->
-<view class='news-img-opc'style="background-image: url('{{ImageUrl}}')"></view>
+<view class='news-img-opc'style="background-image: url('{{ImageUrl}}')">
+
+</view>
 <!-- //新闻图片 -->
 <view class='news-img'>
 
-<!-- 修改后添加了一个默认图片 -->
-  <block wx:if='{{ImageUrl.length!=0}}'>
-    <image class='img' src='{{ImageUrl}}'></image>
-  </block>
-  <block wx:else>
-    <view class='img' src='{{defaultImage}}'></view>
-  </block>
+<!-- 修改后添加了一个默认图片 使用js！！三元运算-->
+
+    <image class='img' src='{{!!ImageUrl ? ImageUrl:defaultImage}}'></image>
+
 </view>
 
 <!-- //新闻标题等 -->
@@ -58,6 +57,6 @@
 
   <!-- //小新闻图片 -->
   <view class='item-img'>
-    <image class='item-small-img' src='{{item.ImageUrl}}' mode='aspectFill' style='width:220rpx;height:126rpx;'></image>
+    <image class='item-small-img' src='{{!!item.ImageUrl ? item.ImageUrl:item.defaultImage}}' mode='aspectFill' style='width:220rpx;height:126rpx;'></image>
   </view>
 </view>

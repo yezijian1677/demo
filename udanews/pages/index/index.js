@@ -1,27 +1,21 @@
+const catNameMap = {
+  gn: "国内",
+  gj: "国际",
+  cj: "财经",
+  yl: "娱乐",
+  js: "军事",
+  ty: "体育",
+  other: "其他"
+};
+
 Page({
 
   data:{
-    //首页图片的元素
-    typeArray: [
-      { typeMsg: '国内' },
-      { typeMsg: '国际' },
-      { typeMsg: '财经' },
-      { typeMsg: '娱乐' },
-      { typeMsg: '军事' },
-      { typeMsg: '体育' },
-      { typeMsg: '其他' },
-    ],
 
-    dataPosType:[
-      { type: 'gn' },
-      { type: 'gj' },
-      { type: 'cj' },
-      { type: 'yl' },
-      { type: 'js' },
-      { type: 'ty' },
-      { type: 'other' },
-    ],
+    catNameMap,
+    categories: ["gn", "gj", "cj", "yl", "js", "ty", "other"],
 
+    defaultImage: '',
     ImageUrl: '',
     title: '',
     date1: '',
@@ -33,13 +27,19 @@ Page({
     type: 'gn',
 
   },
+  //下拉刷新
+  onPullDownRefresh() {
+    this.getIndex(() => {
+      wx.stopPullDownRefresh()
+    })
+  },
 
   onLoad(){
     this.getIndex();
   },
 
 //获取页面
-  getIndex(){
+  getIndex(callback){
 
     wx.showLoading({
       title: '资讯正在加载中',
@@ -67,6 +67,7 @@ Page({
 
       complete: ()=> {
         wx.hideLoading();
+        callback && callback();
       }
     })
 
@@ -79,6 +80,7 @@ Page({
     let source = result[0].source;
     let date1 = result[0].date.substring(11,16);
     let id = result[0].id;
+    let defaultImage = 'https://i.loli.net/2017/11/09/5a046546a2a1f.jpg'
 
     this.setData({
       ImageUrl:url,
@@ -86,6 +88,8 @@ Page({
       source: source,
       date1: date1,
       id: id,
+      defaultImage: defaultImage
+
     })
   },
 
@@ -100,7 +104,7 @@ Page({
         date: result[i].date.substring(11,16),
         source: result[i].source,
         ImageUrl: result[i].firstImage,
-        defaultImage: result[i].firstImage,
+        defaultImage: 'https://i.loli.net/2017/11/09/5a046546a2a1f.jpg',
       })
       this.setData({
         item: item,
@@ -114,14 +118,9 @@ Page({
     console.log(e.currentTarget)
     let type = e.currentTarget.dataset.pos;
     console.log(type);
-    let typeList = ['gj','gn','cj','yl','js','ty','other'];
-    for(let i=0;i<typeList.length;i++){
-      if(type===typeList[i]){
-        this.setData({
-          type: typeList[i]
-        })
-      }
-    }
+    this.setData({
+      type: type,
+    })
     this.getIndex();
   },
 

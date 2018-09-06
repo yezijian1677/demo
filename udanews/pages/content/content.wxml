@@ -2,7 +2,12 @@
 <view class='header'>
   <view class='header-title'>{{title}}</view>
   <view class='header-bottom'>
+    <block wx:if='{{source.length!=0}}'>
     <view class='bottom-source'>{{source}}</view>
+    </block>
+    <block wx:else>
+    <view class='bottom-source'>资讯快读</view>
+    </block>
     <view class='bottom-date'>{{date}}</view>
     <view class='bottom-record'>阅读 {{readCount}}</view>
   </view>

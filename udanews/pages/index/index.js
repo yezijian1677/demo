@@ -67,7 +67,7 @@ Page({
 
       complete: ()=> {
         wx.hideLoading();
-        callback && callback();
+        typeof callback === 'function' && callback();
       }
     })
 

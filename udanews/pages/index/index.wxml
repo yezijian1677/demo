@@ -5,7 +5,7 @@
 
 </view>
 
-
+<view class='total'>
 <!-- //首页图片导航 -->
 <view class='navigator-img'>
 
@@ -37,6 +37,7 @@
   </view>
 </view>
  
+</view>
 </view>
 
 <view class='navigator-small' wx:for='{{item}}' bindtap='showDetail' data-pos='{{item.id}}'>

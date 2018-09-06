@@ -25,8 +25,8 @@
   background-size: 100% 100%;
 }
 .news-img {
-  position: absolute;
-  top: 92rpx;
+  position: relative;
+  margin-top: -400rpx;
 }
 .img {
   position:relative; 
@@ -36,8 +36,8 @@
   width: 700rpx;
 }
 .news-text {
-  position: absolute;
-  top: 320rpx;
+  position: relative;
+  margin-top: -160rpx;
   left: 50rpx;
   width: 650rpx;
 }
@@ -65,6 +65,9 @@
   font-weight: 600;
   margin-right: 20rpx;
 }
+.total {
+  height: 400rpx;
+}
 
 /* 下方小新闻 */
 .navigator-small {
@@ -79,18 +82,18 @@
 }
 .item-title {
   opacity: 0.6;
-  margin-top: 38rpx;
+  margin-top: 30rpx;
   font-family: '微软雅黑';
-  font-size: 32rpx;
+  font-size: 30rpx;
   margin-left: 20rpx;
   margin-right: 30rpx;
   font-weight: 600;
-  line-height: 40rpx;
+  line-height: 36rpx;
 }
 .twoTips{
   display: flex;
   margin-top: 60rpx;
-  line-height: 42rpx;
+  line-height: 38rpx;
   align-content: center;
 }
 .item-source {

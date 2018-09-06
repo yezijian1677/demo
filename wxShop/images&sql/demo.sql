@@ -12,7 +12,7 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-SET @IMAGE_BASE_URL = "YOUR_OWN_IMAGE_BASE_URL"; -- FOR EXAMPLE: https://*****.ap-shanghai.myqcloud.com/
+SET @IMAGE_BASE_URL = "https://product-1256492185.cos.ap-beijing.myqcloud.com/"; -- FOR EXAMPLE: https://*****.ap-shanghai.myqcloud.com/
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

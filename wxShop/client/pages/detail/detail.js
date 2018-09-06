@@ -2,14 +2,14 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index.js');
 const config = require('../../config.js');
 
-// pages/home/home.js
+// pages/detail/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    productList: [],//商品列表
+    product: {},
   
   },
 
@@ -17,41 +17,41 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   this.getProductList();
+    this.getProduct(options.id);
   },
 
-  // 获取商品
-  getProductList(){
+  //获取商品
+  getProduct(id){
     wx.showLoading({
       title: '商品数据加载中...',
-    })
+    });
 
     qcloud.request({
-      url: config.service.productList,
-      success: result => {
+      url: config.service.productDetail + id,
+      
+      success: res => {
         wx.hideLoading();
-
-        let data = result.data;
-        if(!data.code){
+        let data = res.data;
+        if (!data.code) {
           this.setData({
-            productList: data.data,
+            product: data.data,
           })
         } else {
-          wx.showToast({
-            title: '商品数据加载失败',
-          })
+         setTimeout(()=>{
+           wx.navigateBack()
+         },2000)
         }
       },
-      fail: result => {
+
+      fail: ()=>{
         wx.hideLoading();
-        wx.showToast({
-          icon: 'none',
-          title: '商品数据加载失败',
-        })
-      },
+
+        setTimeout(()=>{
+          wx.navigateBack()
+        },2000)
+      }
     })
   },
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成

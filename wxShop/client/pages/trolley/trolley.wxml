@@ -1,2 +1,80 @@
 <!--pages/trolley/trolley.wxml-->
-<text>pages/trolley/trolley.wxml</text>
+<image class='bg' src='/images/bg.png'></image>
+<!-- 未登陆界面 -->
+<view wx:if='{{!userInfo}}'>
+  <view class='unlogin-card'>
+    <view class='unlogin-head'></view>
+    <view class='unlogin-info'>
+      <view class='unlogin-text'>未登录</view>
+      <view class='unlogin-tips'>点击微信登录后可方便购物</view>
+    </view>
+  </view>
+
+  <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type="getUserInfo" bindgetuserinfo="onTapLogin">微信登录</button>
+  <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+</view>
+
+<!-- 当购物车内有商品 -->
+<view wx:elif='{{trolleyList.length > 0}}'>
+  <!-- 顶部样式 -->
+  <view class='trolley-top'>
+    <!-- 全选样式 -->
+    <view class='trolley-total'>
+      <view class="trolley-check-wrapper white {{isTrolleyTotalCheck ? 'check' : ''}}">
+        <image class='trolley-check' src='/images/check.png' wx:if='{{isTrolleyTotalCheck}} '></image>
+      </view>
+      <view class='trolley-edit'>全选</view>
+    </view>
+   <!-- 编辑样式 -->
+   <view class='trolley-edit'>{{isTrolleyEdit ? '完成' : '编辑'}}</view>
+  </view>
+
+  <!-- 购物车列表样式 -->
+  <scroll-view class='product-list' scroll-y scroll-with-animation enable-back-to-top>
+    <view class='product-card' wx:for='{{trolleyList}}' wx:for-item='item' wx:key='id'>
+      <view class="trolley-check-wrapper  {{trolleyCheckMap[item.id] ? 'check' : ''}}">
+        <image class='trolley-check' src='/images/check.png' wx:if="{{trolleyCheckMap[item.id]}}"></image>
+      </view>
+      <image class='product-img' src='{{item.image}}'></image>
+
+      <!-- 单项产品信息 -->
+      <view class='product-info'>
+        <view class='product-name'>{{item.name}}</view>
+        <view class='product-price'>{{item.price}}</view>
+        <!-- 当处于可编辑状态的的时候 -->
+        <view class='product-count-edit' wx:if='isTrolleyEdit'>
+          <view class='count-minus'>-</view>
+          <view class='count-now'>{{item.count}}</view>
+          <view class='count-add'>+</view>
+        </view>
+        <view class='product-count' wx:else>x{{item.count}}</view>
+      </view>
+
+    </view>
+  </scroll-view>
+
+  <!-- 底部结算页面 -->
+  <view class='trolley-account'>
+    <view class='trolley-total'>
+      <view class="trolley-check-wrapper {{isTrolleyTotalCheck ? 'check' : ''}}">
+        <image class='trolley-check' src='/images/check.png' wx:if='{{isTrolleyTotalCheck}}'></image>
+      </view>
+      <view class='trolley-total-text'>全选</view>
+    </view>
+
+
+    <view class='trolley-account-text'>
+      <view>总价</view>
+      <view class='trolley-account-now'>￥{{trolleyAccount}}</view>
+    </view>
+
+    <view class="pay-btn {{trolleyAccount ? 'canpay' : ''}}">结算</view>
+  </view>
+
+</view>
+
+<view class='trolley-empty' wx:else>
+  <image class='empty-image' src='/images/trolley.png'></image>
+  <view class='empty-text'>购物车是空的</view>
+  <view class='empty-text'>快添加物品进来吧</view>
+</view>

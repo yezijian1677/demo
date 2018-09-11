@@ -22,6 +22,10 @@ router.post('/upload', controllers.upload)
 router.get('/product', controllers.product.list)
 //get商品详情
 router.get('/product/:id', controllers.product.detail)
+//创建订单
+router.post('/order', validationMiddleware, controllers.order.add)
+//显示已购买订单
+router.get('/order', validationMiddleware, controllers.order.list)
 
 // --- 信道服务接口 Demo --- //
 // GET  用来响应请求信道地址的

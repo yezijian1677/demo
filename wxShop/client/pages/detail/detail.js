@@ -10,7 +10,6 @@ Page({
    */
   data: {
     product: {},
-  
   },
 
   /**
@@ -20,35 +19,46 @@ Page({
     this.getProduct(options.id);
   },
 
+  //查看评论
+  onTapCommentEntry() {
+    let product = this.data.product
+    if (product.commentCount) {
+      wx.navigateTo({
+        url: `/pages/comment/comment?id=${product.id}&price=${product.price}&name=${product.name}&image=${product.image}`
+      })
+    }
+  },
+
   //获取商品
-  getProduct(id){
+  getProduct(id) {
     wx.showLoading({
       title: '商品数据加载中...',
-    });
+    })
 
     qcloud.request({
       url: config.service.productDetail + id,
-      
-      success: res => {
-        wx.hideLoading();
-        let data = res.data;
+      success: result => {
+        wx.hideLoading()
+
+        let data = result.data
+        console.log(data);
+
         if (!data.code) {
           this.setData({
-            product: data.data,
+            product: data.data
           })
         } else {
-         setTimeout(()=>{
-           wx.navigateBack()
-         },2000)
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 2000)
         }
       },
+      fail: () => {
+        wx.hideLoading()
 
-      fail: ()=>{
-        wx.hideLoading();
-
-        setTimeout(()=>{
+        setTimeout(() => {
           wx.navigateBack()
-        },2000)
+        }, 2000)
       }
     })
   },
@@ -66,7 +76,8 @@ Page({
       login: true,
       method: 'POST',
       data: {
-        list: [product]
+        list: [product],
+        isInstantBuy: true
       },
       success: result => {
         wx.hideLoading()
@@ -91,6 +102,49 @@ Page({
       }
     })
   },
+
+  //添加购物车
+  addToTrolley() {
+    wx:wx.showLoading({
+      title: '正在添加到购物车...',
+    });
+
+    qcloud.request({
+      url: config.service.addTrolley,
+      login: true,
+      method: 'PUT',
+      data: this.data.product,
+
+      success: result => {
+        wx.hideLoading();
+
+        let data = result.data;
+        
+        if(!data.code){
+          wx.showToast({
+            title: '已添加到购物车',
+          })
+        } else {
+          wx.showToast({
+            title: '添加购物车失败',
+            icon: 'none'
+          })
+        }
+      },
+
+      fail: ()=> {
+        wx.hideLoading();
+
+        wx.showToast({
+          title: '添加到购物车失败',
+          icon: 'none'
+        })
+      }
+    });
+
+  },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

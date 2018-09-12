@@ -26,6 +26,16 @@ router.get('/product/:id', controllers.product.detail)
 router.post('/order', validationMiddleware, controllers.order.add)
 //显示已购买订单
 router.get('/order', validationMiddleware, controllers.order.list)
+//商品添加到购物车列表
+router.put('/trolley', validationMiddleware, controllers.trolley.add)
+// 获取购物车商品列表
+router.get('/trolley', validationMiddleware, controllers.trolley.list)
+// 更新购物车商品列表
+router.post('/trolley', validationMiddleware, controllers.trolley.update)
+// 添加评论
+router.put('/comment', validationMiddleware, controllers.comment.add)
+// 获取评论列表
+router.get('/comment', controllers.comment.list)
 
 // --- 信道服务接口 Demo --- //
 // GET  用来响应请求信道地址的

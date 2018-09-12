@@ -26,19 +26,19 @@
   </view>
   
   <!-- 评价 -->
-  <view class='comment-entry'>
+ <view class='comment-entry' bindtap='onTapCommentEntry'>
     <view class='comment-btn'>
       <view class='comment-title'>已买评价</view>
-      <view class='comment-count'>1条</view>
+      <view class='comment-count'>{{product.commentCount}}条</view>
       <image class='comment-arrow' src='/images/grey-arrow.png'></image>
     </view>
-    <view class='comment-preview'>"test"</view>
+    <view class='comment-preview'>{{product.firstComment.content}}</view>
   </view>
 
 </view>
 
 <!-- 操作区域 -->
 <view class='opr-cnt'>
-  <view class='opr-trolley'>加入购物车</view>
+  <view class='opr-trolley' bindtap='addToTrolley'>加入购物车</view>
   <view class='opr-buy' bindtap='buy'>立即购买</view>
 </view>

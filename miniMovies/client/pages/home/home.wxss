@@ -1,0 +1,63 @@
+/* pages/home/home.wxss */
+.img {
+  padding-top: 28rpx;
+  padding-right: 20rpx;
+  width: 36rpx;
+  height: 36rpx;
+  opacity: 0.4;
+}
+.text {
+  padding-top: 24rpx;
+  font-size: 32rpx;
+  color: #A4B6C5
+}
+.navigator1, .navigator {
+  display: flex;
+}
+.navigator1 {
+  width: 750rpx;
+  justify-content: center;
+}
+.navigator {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+}
+.film-card {
+  background: #F8F9FB;
+  height: 1106rpx;
+}
+.film-img {
+  padding-top:40rpx; 
+  height: 766rpx;
+  width: 500rpx;
+  margin: 0 125rpx;
+}
+.film-name {
+  font-size: 42rpx;
+  color: #4B5863;
+  margin-top: 20rpx;
+  text-align: center;
+  line-height: 52rpx;
+  font-weight: bold;
+}
+.film-recom {
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+.recom-avatar {
+  height: 72rpx;
+  width: 72rpx;
+  border-radius: 50%;
+}
+.recom-text {
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 42rpx;
+  margin-top: 25rpx;
+  color: #4B5863;
+}

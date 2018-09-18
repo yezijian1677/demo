@@ -1,0 +1,24 @@
+<!--pages/home/home.wxml-->
+<!-- 电影推荐卡 -->
+<view class='film-card'>
+  <image class='film-img' src='{{movies.image}}'></image>
+  <view class='film-name'>{{movies.title}}</view>
+
+  <view class='film-recom'>
+    <image class='recom-avatar' src='{{movies.image}}'></image>
+    <view class='recom-text'>徐妍给你推荐了一部电影</view>
+  </view>
+</view>
+
+<!-- 底部导航 -->
+<view class='navigator'>
+  <navigator class='navigator1'>
+    <image class='img' src='../../img-mini/hot.svg'></image>
+    <view class='text'>热门</view>
+  </navigator>
+  <navigator class='navigator1'>
+    <image class='img' src='../../img-mini/me.svg'></image>
+    <view class='text'>我的</view>
+  </navigator>
+</view>
+

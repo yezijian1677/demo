@@ -1,10 +1,32 @@
 /* 未登录页面 */
+.allButton {
+  display: flex;
+}
+.backButton {
+  padding-top: 80rpx;
+  font-size: 26rpx;
+  margin-right: 120rpx;
+  color: gray;
+  height: 32rpx;
+  text-align: center;
+}
+.back {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #ffeebb;
+}
+.backimg{
+  width: 750rpx;
+  height: 820rpx;
+}
 .unlogin-card {
   display: flex;
   align-items: center;
   margin: 50rpx 27rpx 0;
   height: 200rpx;
-  background: #ffffff;
+  background:#F8F9FB;
   box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
   border-radius: 13rpx;
 }
@@ -14,7 +36,7 @@
   height: 100rpx;
   width: 100rpx;
   border-radius: 50%;
-  background: #f5e069;
+  background: #ffeebb;
 }
 .unlogin-info {
   flex: 1;
@@ -36,10 +58,101 @@
   margin: 34rpx auto 0;
   width: 250rpx;
   height: 80rpx;
+  left: 100rpx;
   line-height: 80rpx;
-  background: #f5e069;
+  background: #09BA07;
   border-radius: 10rpx;
   font-size: 30rpx;
   text-align: center;
-  color: #34373D;
+  color: white;
+}
+/* 背景*/
+.me-wrapper {
+  height: 1106rpx;
+  background: #F8F9FB;
+  border-bottom: 3rpx solid #E0E5E8;
+}
+
+/* 头部导航 */
+.header {
+  height: 150rpx;
+  display: flex;
+  color: #FBB091;
+  justify-content: center;
+}
+.header-text {
+  margin-top: 60rpx;
+  font-size: 28rpx;
+  margin-right: 15rpx;
+}
+.header-down {
+  position: absolute;
+  margin-top: 60rpx;
+  margin-left: 80rpx;
+  font-size: 28rpx;
+}
+
+/* 所有卡片 */
+.all-card {
+  height: 956rpx;
+}
+
+/* 评论卡片 */
+.star-card {
+  height: 300rpx;
+  width: 680rpx;
+  margin: 0 auto;
+  background: white;
+  display: flex;
+  margin-bottom: 30rpx;
+}
+.card-img {
+  height: 300rpx;
+  width: 220rpx;
+}
+.card-right {
+  padding-left: 40rpx;
+}
+.card-name {
+  padding-top: 20rpx;
+  font-size: 38rpx;
+  color: black;
+  font-weight: bold;
+  height: 80rpx;
+}
+.card-comment {
+  height: 100rpx;
+  width: 400rpx;
+  font-size: 28rpx;
+  color: gray;
+}
+
+/* 用户头像及名字 */
+.user {
+  display: flex;
+}
+.card-avatar {
+  height: 52rpx;
+  width: 52rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.card-userName {
+  font-size: 30rpx;
+  color: gray;
+  line-height: 52rpx;
+  text-align: center;
+}
+
+/* 底部导航栏 */
+.back2home {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  font-size: 30rpx;
+  color: grey;
+  line-height: 100rpx;
+  text-align: center;
 }

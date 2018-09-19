@@ -13,6 +13,47 @@ Page({
   data: {
     userInfo: null,
     locationAuthType: app.data.locationAuthType,
+    headerType: 1,
+    //测试数据
+    comment_test: [
+      {
+        id: 0,
+        image: 'https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg',
+        name: '复仇者1',
+        comment: 'adadadadaaaASDASDAD ASD ASD ASD ASD AS DSA D',
+        avatar: 'https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg',
+        userName: '徐妍1'
+      },
+
+      {
+        id: 1,
+        image: 'https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg',
+        name: '复仇者2',
+        comment: 'adadadada',
+        avatar: 'https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg',
+        userName: '徐妍2'
+      },
+
+      {
+        id: 2,
+        image: 'https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg',
+        name: '复仇者3',
+        comment: 'adadadada',
+        avatar: 'https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg',
+        userName: '徐妍3'
+      },
+
+    ],
+
+
+  },
+
+  //切换类型
+  onTapSwitchType(e){
+    let nowType = !e.currentTarget.dataset.type;
+    this.setData({
+      headerType: nowType
+    })
   },
 
   // 点击登录函数
@@ -28,21 +69,6 @@ Page({
         locationAuthType: app.data.locationAuthType
       }
     })
-  },
-
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
 
   /**

@@ -46,10 +46,13 @@ Page({
 
       fail: () => {
         wx.hideLoading();
-        wx.showToast({
-          title: '影片加载失败',
-          icon: 'none'
-        });
+        
+        setTimeout(() => {
+          wx.showToast({
+            title: '影片加载失败',
+            icon: 'none'
+          });
+        })
       },
 
     });

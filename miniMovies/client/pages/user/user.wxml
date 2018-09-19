@@ -1,6 +1,7 @@
 <!--client/pages/user/user.wxml-->
 <!-- 未登陆界面 -->
-<view wx:if='{{!userInfo}}'>
+<view wx:if='{{!userInfo}}' class='unlogin'>
+
   <view class='unlogin-card'>
     <view class='unlogin-head'></view>
     <view class='unlogin-info'>
@@ -9,10 +10,43 @@
     </view>
   </view>
 
-  <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type="getUserInfo" bindgetuserinfo="onTapLogin">微信登录</button>
-  <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+  <view class='allButton'>
+    <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type="getUserInfo" bindgetuserinfo="onTapLogin">微信登录</button>
+    <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+    <navigator class='backButton' url='../home/home'>返回首页</navigator>
+  </view>
+
+<view class='back'><image class='backimg' src='../../img-mini/timg1.jpg'></image></view>
+
 </view>
 
+
 <view wx:else>
-  <view>登陆成功</view>
+  <view class='me-wrapper'>
+
+    <!-- 选择收藏的影评或者我的影评 -->
+    <view class='header' bindtap='onTapSwitchType' data-type='{{headerType}}'>
+      <view class='header-text'>{{headerType ? '收藏的影评' : '我的影评'}}</view>
+      <view class='header-down'>v</view>
+    </view>
+
+    <!-- 收藏评论卡 -->
+    <scroll-view scroll-y wx:if='{{comment_test.length > 0}}' class='all-card'>
+        <view wx:for='{{comment_test}}' wx:key='id' class='star-card'>
+          <image class='card-img' src='{{item.image}}'></image>
+          <view class='card-right'>
+            <view class='card-name'>{{item.name}}</view>
+            <view class='card-comment'>{{item.comment}}</view>
+            <view class='user'>
+              <image class='card-avatar' src='{{item.avatar}}'></image>
+              <view class='card-userName'>{{item.userName}}</view>
+            </view>
+          </view>
+        </view>
+    </scroll-view>
+
+  </view>
+
+  <navigator class='back2home' url='../home/home'>回到首页</navigator>
+  
 </view>

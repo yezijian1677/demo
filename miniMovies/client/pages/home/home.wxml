@@ -12,11 +12,11 @@
 
 <!-- 底部导航 -->
 <view class='navigator'>
-  <navigator class='navigator1'>
+  <navigator class='navigator1' >
     <image class='img' src='../../img-mini/hot.svg'></image>
     <view class='text'>热门</view>
   </navigator>
-  <navigator class='navigator1'>
+  <navigator class='navigator1' url='../user/user' >
     <image class='img' src='../../img-mini/me.svg'></image>
     <view class='text'>我的</view>
   </navigator>

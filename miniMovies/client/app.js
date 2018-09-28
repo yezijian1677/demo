@@ -2,103 +2,76 @@
 var qcloud = require('./vendor/wafer2-client-sdk/index');
 var config = require('./config');
 
-let userInfo;
-
-const UNPROMPTED = 0;
-const UNAUTHORIZED = 1;
-const AUTHORIZED = 2;
+var userInfo;
 
 App({
+
+  /**
+   * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
+   */
   onLaunch: function () {
-    qcloud.setLoginUrl(config.service.loginUrl)
+    qcloud.setLoginUrl(config.service.loginUrl);
   },
 
-  data: {
-    locationAuthType: UNPROMPTED,
-  },
+  /**
+   * 会话检查
+   */
 
-  login({ success, error }) {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo'] === false) {
-          this.data.locationAuthType = UNAUTHORIZED
-          // 已拒绝授权
-          wx.showModal({
-            title: '提示',
-            content: '请授权我们获取您的用户信息',
-            showCancel: false
-          })
-          error && error()
-        } else {
-          this.data.locationAuthType = AUTHORIZED
-          this.doQcloudLogin({ success, error })
-        }
-      }
-    })
-  },
-  doQcloudLogin({ success, error }) {
-    // 调用 qcloud 登陆接口
-    qcloud.login({
-      success: result => {
-        if (result) {
-          let userInfo = result
-          success && success({
-            userInfo
-          })
-        } else {
-          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
-          this.getUserInfo({ success, error })
-        }
-      },
-      fail: () => {
-        error && error()
-      }
-    })
-  },
-  getUserInfo({ success, error }) {
-    if (userInfo) return userInfo
-    qcloud.request({
-      url: config.service.user,
-      login: true,
-      success: result => {
-        let data = result.data
-        if (!data.code) {
-          let userInfo = data.data
-          success && success({
-            userInfo
-          })
-        } else {
-          error && error()
-        }
-      },
-      fail: () => {
-        error && error()
-      }
-    })
-  },
-  checkSession({ success, error }) {
-    if (userInfo) {
-      return success && success({
-        userInfo
-      })
+  checkSession({ success, fail}) {
+    //如果存在登陆信息，直接返回
+    console.log('check Userinfo have', userInfo);
+    if(userInfo) {
+      console.log('success');
+      success && success(userInfo);
+      return;
     }
+
+    //首次检查
     wx.checkSession({
+      //检查会话成功后，获取用户信息
       success: () => {
-        this.getUserInfo({
+        wx.getUserInfo({
           success: res => {
-            userInfo = res.userInfo
-            success && success({
-              userInfo
-            })
+            userInfo = res.userInfo;
+            console.log('会话获取信息成功');
+            success && success(userInfo);
           },
-          fail: () => {
-            error && error()
+          fail: err => {
+            console.log(err);
+            console.log("获取信息失败");
+            fail && fail(err);
           }
         })
       },
-      fail: () => {
-        error && error()
+
+      fail: err => {
+        // 会话失效，重新执行登录
+        wx.login({
+          
+        });
+        fail && fail(err);
       }
     })
   },
+
+  /**
+   * 当小程序启动，或从后台进入前台显示，会触发 onShow
+   */
+  onShow: function (options) {
+    
+  },
+
+  /**
+   * 当小程序从前台进入后台，会触发 onHide
+   */
+  onHide: function () {
+    
+  },
+
+  /**
+   * 当小程序发生脚本错误，或者 api 调用失败时，会触发 onError 并带上错误信息
+   */
+  onError: function (msg) {
+    
+  }
 })

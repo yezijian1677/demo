@@ -12,7 +12,6 @@ Page({
    */
   data: {
     userInfo: null,
-    locationAuthType: app.data.locationAuthType,
     headerType: 1,
     //测试数据
     comment_test: [
@@ -56,37 +55,42 @@ Page({
     })
   },
 
-  // 点击登录函数
-  onTapLogin: function () {
-    app.login({
-      success: ({ userInfo }) => {
-        this.setData({
-          userInfo,
-          locationAuthType: app.data.locationAuthType
-        })
-      },
-      error: () => {
-        locationAuthType: app.data.locationAuthType
-      }
-    })
+  // 登录函数
+  onTapLogin(e) {
+   if (!e.detail.userInfo) {
+    wx.showToast({
+      title: '已拒绝授权',
+      icon: 'none',
+    });
+    console.log("授权失败");
+   } else {
+     let userInfo = e.detail.userInfo;
+     this.setData({
+       userInfo: userInfo,
+     })
+   }
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 同步授权状态
-    this.setData({
-      locationAuthType: app.data.locationAuthType
-    })
-    app.checkSession({
-      success: ({ userInfo }) => {
-        this.setData({
-          userInfo
-        });
-        console.log(userInfo);
-      }
-    })
+   
+   app.checkSession({
+     success: userInfo => {
+       console.log(userInfo);
+       this.setData({
+         userInfo,
+         login: true,
+       })
+     },
+     fail: err => {
+       wx.showToast({
+         title: '请登录',
+         icon: 'none',
+       })
+     }
+   })
   },
 
   /**

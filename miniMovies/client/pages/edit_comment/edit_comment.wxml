@@ -1,0 +1,16 @@
+<!--client/pages/edit_comment/edit_comment.wxml-->
+<view class='wrapper'>
+  <image class='img' src='{{movies_detail.image}}'></image>
+  <view class='info-card'>
+    <view class='title'>{{movies_detail.title}}</view>
+    <view class='description'>
+      <textarea class='input-area' bindinput='onInput' auto-focus maxlength='160' placeholder='输入你的影评内容..' placeholder-class='td'></textarea>
+    </view>
+    <view class='func-button'>
+      <image src='../../img-mini/record.svg' class='img-record'></image>
+      <view class='record'>录音</view>
+    </view>
+  </view>
+</view>
+<navigator class='well' url='/pages/comment-view/comment-view?id={{id}}&img={{movies_detail.image}}&title={{movies_detail.title}}&content={{comment_value}}'>完成</navigator>
+

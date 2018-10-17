@@ -1,0 +1,35 @@
+.all-card {
+ background: #F8F9FB;
+ height: 1206rpx;
+}
+.star-card {
+  top: 100rpx;
+  position: relative;
+  height: 300rpx;
+  width: 680rpx;
+  margin: 0 auto;
+  background: white;
+  display: flex;
+  margin-bottom: 30rpx;
+}
+.card-img {
+  height: 300rpx;
+  width: 220rpx;
+}
+.card-right {
+  padding-left: 40rpx;
+}
+.card-title {
+  padding-top: 60rpx;
+  font-size: 38rpx;
+  color: black;
+  font-weight: bold;
+  height: 80rpx;
+  margin-bottom: 40rpx;
+}
+.card-category {
+  height: 100rpx;
+  width: 400rpx;
+  font-size: 28rpx;
+  color: gray;
+}

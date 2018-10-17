@@ -2,7 +2,12 @@
   "pages": [
     "pages/home/home",
     "pages/user/user",
-    "pages/hot/hot"
+    "pages/hot/hot",
+    "pages/detail/detail",
+    "pages/edit_comment/edit_comment",
+    "pages/comment/comment",
+    "pages/comment-view/comment-view",
+    "pages/comment-list/comment-list"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -31,6 +31,12 @@ var config = {
         
         //拉取用户信息
         user: `${host}/weapp/user`,
+
+        //获取我的影评收藏
+        markList: `${host}/weapp/mark`,
+
+        //添加评论
+        addComment: `${host}/weapp/comment`
     }
 };
 

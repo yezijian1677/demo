@@ -1,0 +1,12 @@
+
+<!-- 收藏评论卡 -->
+<view class='all-card'>
+  <navigator wx:for='{{movies_list}}' wx:key='id' class='star-card' url='page/detail/detail?id={{item.id}}'>
+      <image class='card-img' src='{{item.image}}'></image>
+      <view class='card-right'>
+        <view class='card-title'>{{item.title}}</view>
+        <view class='card-category'>{{item.category}}</view>
+      </view>
+  </navigator>
+</view>
+

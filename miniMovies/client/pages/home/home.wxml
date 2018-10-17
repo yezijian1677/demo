@@ -1,9 +1,10 @@
 <!--pages/home/home.wxml-->
 <!-- 电影推荐卡 -->
 <view class='film-card'>
-  <image class='film-img' src='{{movies.image}}'></image>
-  <view class='film-name'>{{movies.title}}</view>
-
+  <view bindtap='ToDetail' data-id='{{movieId}}'>
+    <image class='film-img' src='{{movies.image}}'></image>
+    <view class='film-name'>{{movies.title}}</view>
+  </view>
   <view class='film-recom'>
     <image class='recom-avatar' src='{{movies.image}}'></image>
     <view class='recom-text'>徐妍给你推荐了一部电影</view>

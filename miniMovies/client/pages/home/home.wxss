@@ -28,7 +28,7 @@
 .film-card {
   background: #F8F9FB;
   height: 1106rpx;
-   border-bottom: 3rpx solid #E0E5E8;
+  border-bottom: 3rpx solid #E0E5E8;
 }
 .film-img {
   padding-top:40rpx; 

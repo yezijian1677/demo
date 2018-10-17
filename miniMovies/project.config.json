@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -40,7 +40,32 @@
 				{
 					"id": -1,
 					"name": "hot",
-					"pathName": "pages/hot/hot"
+					"pathName": "pages/hot/hot",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "detail",
+					"pathName": "pages/detail/detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "edit",
+					"pathName": "pages/edit_comment/edit_comment",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "comment",
+					"pathName": "pages/comment/comment",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "comment-view",
+					"pathName": "pages/comment-view/comment-view",
+					"query": ""
 				}
 			]
 		}

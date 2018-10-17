@@ -1,0 +1,20 @@
+<view class='wrapper'>
+  <image class='img' src='{{img}}'></image>
+  <view class='info-card'>
+    <view class='title'>{{title}}</view>
+    <view class='description'>
+      <view class='user-info'>
+        <image src='{{img}}' class='avatar'></image>
+        <view class='mark'>"</view>
+      </view>
+      <view class='user-comment'>
+        <view class='username'>小黄蜂的影评</view>
+        <view class='comment'>{{comment_value}}</view>
+      </view>
+    </view>
+    <view class='func-button'>
+      <view class='button' data-type='view_comment' bindtap='viewOrAdd'>重新编辑</view>
+      <view class='button' data-type='add_comment' bindtap='viewOrAdd'>发布影评</view>
+    </view>
+  </view>
+</view>

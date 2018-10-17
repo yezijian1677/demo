@@ -1,0 +1,12 @@
+<!--client/pages/detail/detail.wxml-->
+<view class='wrapper'>
+  <image class='img' src='{{movies_detail.image}}'></image>
+  <view class='info-card'>
+    <view class='title'>{{movies_detail.title}}</view>
+    <view class='description'>{{movies_decription_short}}</view>
+    <view class='func-button'>
+      <view class='button' data-type='view_comment' bindtap='viewOrAdd'>查看影评</view>
+      <view class='button' data-type='add_comment' bindtap='viewOrAdd'>添加影评</view>
+    </view>
+  </view>
+</view>

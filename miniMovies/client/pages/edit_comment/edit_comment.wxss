@@ -1,0 +1,79 @@
+
+/* client/pages/edit_comment/edit_comment.wxss *//* client/pages/detail/detail.wxss */
+
+.input-area {
+  width: 500rpx;
+  height: 400rpx;
+  text-align: center;
+}
+.wrapper {
+  background: #F8F9FB;
+  height: 1106rpx;
+
+}
+.img {
+  top: 40rpx;
+  width: 240rpx;
+  height: 320rpx;
+  position: absolute;
+  right: 255rpx;
+  z-index: 1
+}
+.info-card {
+  background: white;
+  width: 680rpx;
+  height: 950rpx;
+  margin: 0 auto;
+  top: 120rpx;
+  position: relative;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+}
+.title {
+  font-size: 38rpx;
+  font-weight: bolder;
+  line-height: 42rpx;
+  text-align: center;
+  padding-top: 260rpx;
+  margin-bottom: 40rpx;
+}
+.description {
+  width: 500rpx;
+  margin: 0 auto;
+  height: 400rpx;
+  font-size: 30rpx;
+  line-height: 38rpx;
+  opacity: 0.8;
+}
+.func-button {
+  display: flex;
+  position: absolute;
+  bottom: 50rpx;
+  justify-content: center;
+  align-items: center;
+  height: 70rpx;
+  width: 200rpx;
+  text-align: center;
+  border: 3rpx solid #E0E5E8;
+  border-radius: 8rpx;
+  opacity: 0.8;
+  left: 240rpx;
+}
+.img-record {
+  height: 56rpx;
+  width: 56rpx;
+  margin-right: 10rpx;
+}
+.record {
+  font-size: 28rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+.well {
+  font-size: 32rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: white;
+  background-color: #1AAD19;
+  height: 100rpx;
+  width: 100%;
+}

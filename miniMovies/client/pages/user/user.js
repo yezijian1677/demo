@@ -47,6 +47,24 @@ Page({
 
   },
 
+  /**
+   * 获取我的影评收藏列表
+   */
+  getStarComment(){
+    wx.showLoading({
+      title: '列表正在加载...',
+    });
+
+    qcloud.request({
+      url: config.service.markList,
+
+      success: res => {
+        console.log(res);
+        wx.hideLoading();
+      }
+    })
+  },
+
   //切换类型
   onTapSwitchType(e){
     let nowType = !e.currentTarget.dataset.type;
@@ -70,6 +88,9 @@ Page({
      })
    }
   },
+  onLoad(){
+    this.getStarComment();
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -80,7 +101,7 @@ Page({
      success: userInfo => {
        console.log(userInfo);
        this.setData({
-         userInfo,
+         userInfo: userInfo,
          login: true,
        })
      },

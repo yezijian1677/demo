@@ -36,7 +36,7 @@ var config = {
         markList: `${host}/weapp/mark`,
 
         //添加评论
-        addComment: `${host}/weapp/comment`
+        addComment: `${host}/weapp/comments`
     }
 };
 

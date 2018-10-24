@@ -1,1 +1,56 @@
-/* client/pages/comment-list/comment-list.wxss */
+/* 背景*/
+.me-wrapper {
+  height: 1106rpx;
+  background: #F8F9FB;
+  border-bottom: 3rpx solid #E0E5E8;
+}
+
+.comment-list:first-child {
+  position: relative;
+  top: 30rpx;
+}
+.comment-list {
+  background: white;
+  height: 200rpx;
+  border-bottom: 3rpx solid #E0E5E8;
+}
+.user {
+  display: flex;
+  position: relative;
+  top: 30rpx;
+  left: 50rpx;
+  height: 56rpx;
+
+}
+.img {
+  left: 50rpx;
+  height: 56rpx;
+  width: 56rpx;
+  border-radius: 50%;
+}
+.name {
+  line-height: 56rpx;
+  margin-left: 40rpx;
+  font-size: 26rpx;
+}
+.comment {
+position: relative;
+left: 50rpx;
+top: 60rpx;
+line-height: 28rpx;
+font-size: 24rpx;
+}
+
+
+/* 底部导航栏 */
+.back2home {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  font-size: 30rpx;
+  color: grey;
+  line-height: 100rpx;
+  text-align: center;
+}

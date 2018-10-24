@@ -26,7 +26,7 @@ Page({
 
   //获取电影信息
   getMovieData(){
-    let movieId = Math.floor(Math.random()*15);
+    let movieId = Math.floor(Math.random() * (15 - 1) + 1);
 
 
     wx.showLoading({

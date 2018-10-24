@@ -1,16 +1,39 @@
-<!--client/pages/edit_comment/edit_comment.wxml-->
-<view class='wrapper'>
-  <image class='img' src='{{movies_detail.image}}'></image>
-  <view class='info-card'>
-    <view class='title'>{{movies_detail.title}}</view>
-    <view class='description'>
-      <textarea class='input-area' bindinput='onInput' auto-focus maxlength='160' placeholder='输入你的影评内容..' placeholder-class='td'></textarea>
-    </view>
-    <view class='func-button'>
-      <image src='../../img-mini/record.svg' class='img-record'></image>
-      <view class='record'>录音</view>
+<!-- 未登陆界面 -->
+<view wx:if='{{!userInfo}}' class='unlogin'>
+
+  <view class='unlogin-card'>
+    <view class='unlogin-head'></view>
+    <view class='unlogin-info'>
+      <view class='unlogin-text'>未登录</view>
+      <view class='unlogin-tips'>点击微信登录后可收藏电影</view>
     </view>
   </view>
-</view>
-<navigator class='well' url='/pages/comment-view/comment-view?id={{id}}&img={{movies_detail.image}}&title={{movies_detail.title}}&content={{comment_value}}'>完成</navigator>
 
+  <view class='allButton'>
+    <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type="getUserInfo" bindgetuserinfo="onTapLogin">微信登录</button>
+    <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
+   
+    <navigator class='backButton' url='../home/home'>返回首页</navigator>
+  </view>
+
+<view class='back'><image class='backimg' src='../../img-mini/timg1.jpg'></image></view>
+
+</view>
+
+<!--client/pages/edit_comment/edit_comment.wxml-->
+<view wx:else>
+  <view class='wrapper'>
+    <image class='img' src='{{movies_detail.image}}'></image>
+    <view class='info-card'>
+      <view class='title'>{{movies_detail.title}}</view>
+      <view wx:if="{{comment_type == 0}}" class='description'>
+        <textarea class='input-area' bindinput='onInput' auto-focus maxlength='160' placeholder='输入你的影评内容..' placeholder-class='td'></textarea>
+      </view>
+      <view wx:else class='func-button' bindtouchstart='record_start' bindtouchend='record_end'>
+        <image src='../../img-mini/record.svg' class='img-record'></image>
+        <view class='record'>录音</view>
+      </view>
+    </view>
+  </view>
+  <view class='well' bindtap='checkComment'>完成</view>
+</view>

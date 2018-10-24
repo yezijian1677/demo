@@ -22,7 +22,7 @@ Page({
     qcloud.request({
       url: config.service.addComment,
       login: true,
-      method: 'PUT',
+      method: 'put',
       data: {
         content: content,
         product_id: this.data.product.id

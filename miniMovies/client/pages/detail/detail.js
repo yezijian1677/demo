@@ -62,35 +62,38 @@ Page({
   },
 
   /**
-   * 按钮功能选择
+   * 按钮功能选择 文字0 音频1
    */
   viewOrAdd(e) {
     let type = e.currentTarget.dataset.type;
-    console.log(type);
+    // console.log(type);
     let movieId = this.data.movies_detail.id;
-    console.log(movieId);
+    // console.log(movieId);
     let pages = '/pages/';
 
     switch(type){
       case 'view_comment':
         pages += "view_comment/view_comment?id="+movieId;
+        wx.navigateTo({
+          url: pages,
+        });
         break;
+
       case 'add_comment':
-        pages += "edit_comment/edit_comment?id="+movieId;
+        pages += "edit_comment/edit_comment?id=" + movieId;
+        wx.showActionSheet({
+          itemList: ["文字", "录音"],
+          success: res => {
+            // console.log(res.tapIndex);
+            pages += "&comment_type=" + res.tapIndex;
+            console.log(pages);
+            wx.navigateTo({
+              url: pages,
+            });
+          }
+        });
         break;
     }
-    console.log(pages);
-
-    wx.navigateTo({
-      url: pages,
-    });
-  },
-
-  /**
-   * showSection
-   */
-  showSection(){
-    console.log("go");
   },
 
   /**

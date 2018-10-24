@@ -73,7 +73,7 @@ Page({
 
     switch(type){
       case 'view_comment':
-        pages += "view_comment/view_comment?id="+movieId;
+        pages += "comment-list/comment-list?id="+movieId;
         wx.navigateTo({
           url: pages,
         });

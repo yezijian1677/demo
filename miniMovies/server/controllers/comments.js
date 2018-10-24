@@ -18,18 +18,32 @@ module.exports = {
     let recordUrl = data.recordUrl || null
     let type = data.comment_type
 
-    if (!isNaN(movieId)) {
+    if (!isNaN(id)) {
       if(type == 0){
-      await DB.query('INSERT INTO movies_comment(user, username, useravatar, content, movie_id, type) VALUES (?, ?, ?, ?, ?, ?)', [user, username, avatar, content, id, type])
+      await DB.query('INSERT INTO movies_comment(user, username, avatar, content, movie_id, type) VALUES (?, ?, ?, ?, ?, ?)', [user, username, avatar, content, id, type])
       }
       else if(type == 1){
-        await DB.query('INSERT INTO movies_comment(user, username, useravatar, content, movie_id, type) VALUES (?, ?, ?, ?, ?, ?)', [user, username, avatar, recordUrl, id, type])
+        await DB.query('INSERT INTO movies_comment(user, username, avatar, content, movie_id, type) VALUES (?, ?, ?, ?, ?, ?)', [user, username, avatar, recordUrl, id, type])
       }
 
     }
 
     ctx.state.data = {}
   },
+
+  /**
+   * 根据电影id获取评论
+   */
+  getCommentOfMovie: async ctx => {
+    let id = + ctx.params.id;
+    let comment_list;
+    if(!isNaN(id)){
+      comment_list = (await DB.query("select * from movies_comment where movie_id = ? order by create_time desc", [id]));
+    } else {
+      comment_list = [];
+    }
+    ctx.state.data = comment_list;
+  }
   
 
 }

@@ -1,3 +1,7 @@
+//腾讯云
+const qcloud = require('../../vendor/wafer2-client-sdk/index.js');
+const config = require('../../config.js');
+
 // client/pages/comment-list/comment-list.js
 Page({
 
@@ -5,14 +9,64 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    id: 0,
+    
+    comment_id: null,//评论的id
+    username: null,
+    avatar: null,
+    content: null,
+    content_type: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.id)
+    this.setData({
+      id: options.id
+    })
+    this.getCommentList(this.data.id)
+  },
 
+  /**
+   * 获取评论等信息
+   */
+  getCommentList(id){
+    wx.showLoading({
+      title: '评论加载中',
+    })
+    qcloud.request({
+      url: config.service.commentOfMovie + id,
+
+      success: res => {
+        wx.hideLoading();
+        console.log(res)
+        let data = res.data;
+        console.log(data)
+        if (!data.code) {
+          // this.setData({
+            
+          // });
+        } else {
+          wx.showToast({
+            title: '影片加载失败',
+          });
+        }
+      },
+
+      fail: () => {
+        wx.hideLoading();
+
+        setTimeout(() => {
+          wx.showToast({
+            title: '影片加载失败',
+            icon: 'none'
+          });
+        })
+      },
+
+    })
   },
 
   /**

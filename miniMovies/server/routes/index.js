@@ -44,4 +44,7 @@ router.get('/mark', validationMiddleware, controllers.mark.star_comment)
 //添加评论
 router.post('/comments', validationMiddleware, controllers.comments.add)
 
+//根据电影获取评论
+router.get('/comments', controllers.comments.getCommentOfMovie)
+
 module.exports = router

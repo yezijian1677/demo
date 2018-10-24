@@ -36,7 +36,10 @@ var config = {
         markList: `${host}/weapp/mark`,
 
         //添加评论
-        addComment: `${host}/weapp/comments`
+        addComment: `${host}/weapp/comments`,
+
+        //根据电影获取评论
+        commentOfMovie: `${host}/weapp/comments/`
     }
 };
 

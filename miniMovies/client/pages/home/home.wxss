@@ -1,5 +1,6 @@
 /* pages/home/home.wxss */
 .img {
+
   padding-top: 28rpx;
   padding-right: 20rpx;
   width: 36rpx;
@@ -7,19 +8,22 @@
   opacity: 0.4;
 }
 .text {
+
   padding-top: 24rpx;
   font-size: 32rpx;
   color: #A4B6C5
 }
 .navigator1, .navigator {
   display: flex;
+  position: relative;
 }
 .navigator1 {
+  position: relative;
   width: 750rpx;
   justify-content: center;
 }
 .navigator {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;

@@ -15,6 +15,9 @@ Page({
     movieId: 1,
   },
 
+  /**
+   * 去到详情界面
+   */
   ToDetail(e){
     console.log(e);
     let id = e.currentTarget.dataset.id;
@@ -27,7 +30,7 @@ Page({
   //获取电影信息
   getMovieData(){
     let movieId = Math.floor(Math.random() * (15 - 1) + 1);
-
+    // console.log(movieId);
 
     wx.showLoading({
       title: '影片快速加载中',
@@ -65,6 +68,7 @@ Page({
       },
 
     });
+
   },
 
   /**
@@ -106,7 +110,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.getMovieData(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
   /**

@@ -1,12 +1,35 @@
 
   <view class='me-wrapper'>
-    <view class='comment-list'>
-      <view class='user'>
-        <image class='img' src="https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg"></image>
-        <view class='name'>阿朵米</view>
-      </view>
-      <view class='comment'>非常好啊</view>
+    <!-- 如果返回无数据 -->
+    <view wx:if="{{comment_array.length == 0}}">
+      <image src='../../img-mini/order.png' class='no-data-img'></image>
+      <view class='no-data-text'>没有评论噢</view>
     </view>
+
+    
+    <!-- 如果返回有数据 -->
+    <view wx:else>
+
+      <view class='comment-list' wx:for="{{comment_array}}" id='{{item.id}}' bindtap='to_comment_detail' >
+        <view class='user'>
+          <image class='img' src="{{item.avatar}}"></image>
+          <view class='name'>{{item.username}}</view>
+        </view>
+
+        <view wx:if="{{item.type === 0}}">
+          <view class='comment'>{{item.content}}</view>
+        </view>
+        <view wx:else>
+          <view class='playButton' bindtap='play_record' data-url='{{item.content}}'>
+              <image class='play-svg' src='../../img-mini/playNow.svg'></image>
+              <view class='play'>播放音频</view>
+          </view>
+        </view>
+        
+      </view>
+    </view>
+
+    
   </view>
   <navigator class='back2home' url='/pages/home/home'>回到首页</navigator>
   

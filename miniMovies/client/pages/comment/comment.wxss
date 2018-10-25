@@ -1,3 +1,21 @@
+/*播放键*/
+.playButton{
+  display: flex;
+  background: #F8F9FB;
+  height: 60rpx;
+  width: 200rpx;
+}
+.play-svg {
+  margin-top: 12rpx;
+  margin-left: 20rpx;
+  height: 35rpx;
+  width: 35rpx;
+  margin-right: 10rpx;
+}
+.play {
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
 /* client/pages/detail/detail.wxss */
 .wrapper {
   background: #F8F9FB;

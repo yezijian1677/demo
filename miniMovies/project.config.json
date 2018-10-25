@@ -68,9 +68,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "list",
-					"pathName": "pages/comment-list/comment-list"
+					"pathName": "pages/comment-list/comment-list",
+					"query": "id=14"
 				}
 			]
 		}

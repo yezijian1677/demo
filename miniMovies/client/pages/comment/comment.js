@@ -1,3 +1,7 @@
+//腾讯云
+const qcloud = require('../../vendor/wafer2-client-sdk/index.js');
+const config = require('../../config.js');
+
 // client/pages/comment/comment.js
 Page({
 
@@ -5,21 +9,160 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movies_detail: {
-      id: 13,
-      title: "机器人总动员",
-      image: "https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg",
-      category: "爱情 / 科幻 / 动画 / 冒险",
-      description: "公元2805年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长 无边的宇宙之旅。临行前他们委托Buynlarge的公司对地球垃圾进行清理，该公司开发了名为WALL·"
-    }
+    comment_detail: null,
+    imgSrc: null,
+    title: null,
+    comment_id: null,
+  },
 
+
+  /**
+   * 按钮功能选择 文字0 音频1
+   */
+  markOrAdd(e) {
+    let type = e.currentTarget.dataset.type;
+    // console.log(type);
+    let movieId = this.data.comment_detail[0].movie_id;
+    let comment_id = this.data.comment_detail[0].id;
+    // let imgSrc = this.data.movies_detail.image;
+    // let title = this.data.movies_detail.title;
+    // console.log(movieId);
+    let pages = '/pages/';
+
+    switch (type) {
+      case 'mark_comment':
+        this.mark_comment(comment_id);
+        break;
+
+      case 'add_comment':
+        pages += "edit_comment/edit_comment?id=" + movieId;
+        wx.showActionSheet({
+          itemList: ["文字", "录音"],
+          success: res => {
+            // console.log(res.tapIndex);
+            pages += "&comment_type=" + res.tapIndex;
+            console.log(pages);
+            wx.navigateTo({
+              url: pages,
+            });
+          }
+        });
+        break;
+    }
+  },
+  /**
+   * 收藏影评
+   */
+  mark_comment(comment_id){
+    wx.showLoading({
+      title: '收藏中',
+    });
+
+    qcloud.request({
+      url: config.service.mark_comment + comment_id,
+      login: true,
+      method: 'POST',
+      
+      data: {
+        id: comment_id
+      },
+      success: res => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '收藏成功',
+        })
+        wx.redirectTo({
+          url: '/pages/home/home',
+        })
+        console.log("mark successfully", res)
+      },
+
+      fail: res => {
+        wx.hideLoading();
+
+        console.log("mark fail", res)
+        setTimeout(() => {
+          wx.showToast({
+            title: '收藏失败',
+            icon: 'none'
+          });
+        })
+      },
+
+    });
+  },
+
+  /**
+   * 判断是否收藏过
+   */
+  // isMark(id){
+  //   qcloud.request
+  // }
+  
+  /**
+  * 播放音频
+  */
+  play_record(e) {
+    let url = e.currentTarget.dataset.url;
+    // console.log(url);
+    let innerAudioContext = wx.createInnerAudioContext();
+    innerAudioContext.src = url;
+    innerAudioContext.play();
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      imgSrc: options.imgSrc,
+      title: options.title,
+      comment_id: options.id
+    });
+    this.get_comment_detail(options.id);
+  },
 
+  /**
+   * 获取评论详情
+   * 
+   */
+  get_comment_detail(id){
+    console.log("this is comment",id)
+    wx.showLoading({
+      title: '评论加载中',
+    })
+    qcloud.request({
+      url: config.service.getCommentByCommentId + id,
+
+      success: res => {
+        wx.hideLoading();
+        // console.log("in getcomment detail",res)
+        let data = res.data;
+        // console.log(data)
+        // console.log('thissss',data.data);
+        if (!data.code) {
+          this.setData({
+            comment_detail: data.data
+          })
+        } else {
+          wx.showToast({
+            title: '评论加载失败',
+          });
+        }
+      },
+
+      fail: () => {
+        wx.hideLoading();
+
+        setTimeout(() => {
+          wx.showToast({
+            title: '评论加载失败',
+            icon: 'none'
+          });
+        })
+      },
+
+    })
   },
 
   /**

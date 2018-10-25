@@ -1,20 +1,28 @@
 <view class='wrapper'>
-  <image class='img' src='{{movies_detail.image}}'></image>
+  <image class='img' src='{{imgSrc}}'></image>
   <view class='info-card'>
-    <view class='title'>{{movies_detail.title}}</view>
+    <view class='title'>{{title}}</view>
     <view class='description'>
       <view class='user-info'>
-        <image src='{{movies_detail.image}}' class='avatar'></image>
+        <image src='{{comment_detail[0].avatar}}' class='avatar'></image>
         <view class='mark'>"</view>
       </view>
       <view class='user-comment'>
-        <view class='username'>小黄蜂的影评</view>
-        <view class='comment'>{{movies_detail.description}}</view>
+        <view class='username'>{{comment_detail[0].username}}的影评</view>
+        <view wx:if="{{comment_detail[0].type == 0}}">
+          <view class='comment'>{{comment_detail[0].content}}</view>
+        </view>
+        <view wx:else>
+          <view class='playButton' bindtap='play_record' data-url='{{comment_detail[0].content}}'>
+            <image class='play-svg' src='../../img-mini/playNow.svg'></image>
+            <view class='play'>播放音频</view>
+          </view>
+        </view>
       </view>
     </view>
     <view class='func-button'>
-      <view class='button' data-type='view_comment' bindtap='viewOrAdd'>收藏影评</view>
-      <view class='button' data-type='add_comment' bindtap='viewOrAdd'>写影评</view>
+      <view class='button' data-type='mark_comment' bindtap='markOrAdd'>收藏影评</view>
+      <view class='button' data-type='add_comment' bindtap='markOrAdd'>写影评</view>
     </view>
   </view>
 </view>

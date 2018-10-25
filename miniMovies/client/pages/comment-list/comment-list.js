@@ -16,6 +16,34 @@ Page({
     avatar: null,
     content: null,
     content_type: null,
+    comment_array: null,
+
+    //传过来的电影数据
+    imgSrc: null,
+    title: null,
+  },
+
+  /**转至影评详情 */
+  to_comment_detail(e){
+    console.log(e);
+    let id = e.currentTarget.id;
+    let imgSrc = this.data.imgSrc;
+    let title = this.data.tilte;
+  
+    let pages = "/pages/comment/comment?imgSrc=" + imgSrc + "&title=" + title +"&id="+id;
+    wx.navigateTo({
+      url: pages,
+    })
+  },
+  /**
+   * 播放音频
+   */
+  play_record(e){
+    let url = e.currentTarget.dataset.url;
+    console.log(url);
+    let innerAudioContext = wx.createInnerAudioContext();
+    innerAudioContext.src = url;
+    innerAudioContext.play();
   },
 
   /**
@@ -24,7 +52,9 @@ Page({
   onLoad: function (options) {
     console.log(options.id)
     this.setData({
-      id: options.id
+      id: options.id,
+      imgSrc: options.imgSrc,
+      tilte: options.title
     })
     this.getCommentList(this.data.id)
   },
@@ -44,10 +74,11 @@ Page({
         console.log(res)
         let data = res.data;
         console.log(data)
+        console.log(data.data);
         if (!data.code) {
-          // this.setData({
-            
-          // });
+          this.setData({
+            comment_array: data.data
+          })
         } else {
           wx.showToast({
             title: '影片加载失败',

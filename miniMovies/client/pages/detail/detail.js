@@ -68,12 +68,14 @@ Page({
     let type = e.currentTarget.dataset.type;
     // console.log(type);
     let movieId = this.data.movies_detail.id;
+    let imgSrc = this.data.movies_detail.image;
+    let title = this.data.movies_detail.title;
     // console.log(movieId);
     let pages = '/pages/';
 
     switch(type){
       case 'view_comment':
-        pages += "comment-list/comment-list?id="+movieId;
+        pages += "comment-list/comment-list?imgSrc="+imgSrc+"&title="+title+"&id="+movieId;
         wx.navigateTo({
           url: pages,
         });

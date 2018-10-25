@@ -17,7 +17,7 @@
             <image class='play-svg' src='../../img-mini/playNow.svg'></image>
             <view class='play'>播放音频</view>
           </view>
-          <view class='play-time'>2'55min</view>
+          <!-- <view class='play-time'>{{recordTime}}s</view> -->
         </view>
       </view>
 

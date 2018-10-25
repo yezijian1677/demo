@@ -39,12 +39,18 @@ router.get('/movies',controllers.movies.list)
 router.get('/movies/:id', controllers.movies.detail)
 
 //获取我收藏的影评
-router.get('/mark', validationMiddleware, controllers.mark.star_comment)
+router.get('/mark', validationMiddleware, controllers.mark.user_star_comment)
 
 //添加评论
 router.post('/comments', validationMiddleware, controllers.comments.add)
 
-//根据电影获取评论
-router.get('/comments', controllers.comments.getCommentOfMovie)
+//根据电影id获取评论
+router.get('/comments/:id', controllers.comments.getCommentOfMovie)
+
+//根据评论id获取评论
+router.get('/getCommentByCommentId/:id', controllers.getCommentByCommentId.getCommentByCommentId)
+
+//根据id收藏评论
+router.post('/mark/:id', validationMiddleware, controllers.mark.mark_comment)
 
 module.exports = router

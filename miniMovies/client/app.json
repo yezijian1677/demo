@@ -14,7 +14,6 @@
     "backgroundTextStyle": "ligth",
     "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "black"
   }
 }

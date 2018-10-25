@@ -19,7 +19,7 @@ Page({
     comment_value: "",
     comment_type: 0,
     recordAttri: null,
-    recordTime: null,
+    // recordTime: null,
     recordUrl: null,
   },
 
@@ -50,9 +50,11 @@ Page({
         },
         success: res => {
           console.log("upload record success", res);
-          let data = JSON.parse(res.data).data;
+          let data = JSON.parse(res.data);
+          let recordUrl = data.data.imgUrl;
+          console.log(recordUrl);
           this.setData({
-            recordUrl: data.imgUrl
+            recordUrl: recordUrl
           })
           
           this.send2DB()
@@ -81,7 +83,7 @@ Page({
       method: "POST",
       data: {
         id: this.data.id,
-        recorUrl: this.data.recordUrl,
+        recordUrl: this.data.recordUrl,
         content: this.data.comment_value,
         comment_type: this.data.comment_type
       },
@@ -89,8 +91,7 @@ Page({
         wx.hideLoading();
         console.log("send data to db success at send2DB:", res);
         wx.redirectTo({
-          // url: '/pages/comment-list/comment-list?id='+this.data.id,
-          url: '/pages/home/home'
+          url: '/pages/comment-list/comment-list?imgSrc='+this.data.img+'&title='+this.data.title+'&id='+this.data.id,
         });
         wx.showToast({
           title: '发表成功',
@@ -121,9 +122,9 @@ Page({
     console.log("hahah:", app.recordPath);
     let recordAttri = app.recordPath;
     let recordTime = null;
-    if(this.data.comment_type == 1){
-      recordTime = Math.trunc(app.recordPath.duration);
-    }
+    // if(this.data.comment_type == 1){
+    //   recordTime = Math.trunc(app.recordPath.duration);
+    // }
     this.setData({
       id: options.id,
       img: options.img,
@@ -131,7 +132,7 @@ Page({
       comment_value: options.content || null,
       comment_type: options.comment_type,
       recordAttri: recordAttri || null,
-      recordTime: recordTime || null,
+      // recordTime: recordTime || null,
     });
   },
 

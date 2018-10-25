@@ -39,7 +39,13 @@ var config = {
         addComment: `${host}/weapp/comments`,
 
         //根据电影获取评论
-        commentOfMovie: `${host}/weapp/comments/`
+        commentOfMovie: `${host}/weapp/comments/`,
+
+        //根据评论id获取评论
+        getCommentByCommentId: `${host}/weapp/getCommentByCommentId/`,
+
+        //收藏评论
+        mark_comment: `${host}/weapp/mark_comment/`
     }
 };
 

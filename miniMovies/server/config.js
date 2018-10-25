@@ -38,7 +38,9 @@ const CONF = {
         // Bucket 名称
         fileBucket: 'qcloudtest',
         // 文件夹
-        uploadFolder: ''
+        uploadFolder: '',
+        //上传文件类型
+      mimetypes: ['image/gif', 'image/jpeg', 'image/bmp', 'image/png', 'application/pdf', 'video/mp4', 'audio/x-aac', 'audio/mpeg', 'video/webm', 'audio/mpeg', 'audio/mp3', 'audio/m4a']
     },
 
     // 微信登录态有效期

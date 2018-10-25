@@ -6,19 +6,24 @@
     <image class='film-img' src='{{movies.image}}'></image>
     <view class='film-name'>{{movies.title}}</view>
   </view>
-  <view class='film-recom'>
-    <image class='recom-avatar' src='{{movies.image}}'></image>
-    <view class='recom-text'>徐妍给你推荐了一部电影</view>
+  <view wx:if='{{comment_array[0] == null}}' class='no-data-text'>
+    此电影尚未有影评
+  </view>
+  <view wx:else>
+    <view class='film-recom' data-comment_id='{{comment_array[0].id}}' bindtap='ToCommentDetail' >
+      <image class='recom-avatar' src='{{comment_array[0].avatar}}'></image>
+      <view class='recom-text'>{{comment_array[0].username}}给你推荐了一部电影</view>
+    </view>
   </view>
 </view>
 
 <!-- 底部导航 -->
 <view class='navigator'>
-  <navigator class='navigator1' >
+  <navigator class='navigator1' url='/pages/hot/hot' >
     <image class='img' src='../../img-mini/hot.svg'></image>
     <view class='text'>热门</view>
   </navigator>
-  <navigator class='navigator1' url='../user/user' >
+  <navigator class='navigator1' url='/pages/user/user' >
     <image class='img' src='../../img-mini/me.svg'></image>
     <view class='text'>我的</view>
   </navigator>

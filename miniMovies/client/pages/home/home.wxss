@@ -1,3 +1,10 @@
+.no-data-text{
+  font-size: 28rpx;
+  line-height: 34rpx;
+  margin-top: 30rpx;
+  text-align: center;
+
+}
 /* pages/home/home.wxss */
 .img {
 

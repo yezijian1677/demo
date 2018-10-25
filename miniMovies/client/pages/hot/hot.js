@@ -1,83 +1,75 @@
+//腾讯云
+const qcloud = require('../../vendor/wafer2-client-sdk/index.js');
+const config = require('../../config.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    moives: "",
-    movies_list: [
-      {
-        id:	13,
-        title:	"机器人总动员",
-        image:	"https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg",
-        category:	"爱情 / 科幻 / 动画 / 冒险",
-      },
-      {
-        id: 14,
-        title: "机器人总动员",
-        image: "https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg",
-        category: "爱情 / 科幻 / 动画 / 冒险",
-      },
-      {
-        id: 15,
-        title: "机器人总动员",
-        image: "https://movies-1256492185.cos.ap-guangzhou.myqcloud.com/p1461851991.jpg",
-        category: "爱情 / 科幻 / 动画 / 冒险",
-      }
-      ],
+    moives: null,
+    movies_list: [],
   },
-
-  /**
-   * 随机取数据
-   */
 
 
   /**
    * 获取电影列表
    */
-  getHotMovieList(){
-    //随机获取三个id
-    let numSet = new Set();
-    for(let i =0; i < 3; i++){
-      numSet[i] = Math.floor(Math.random()*15);
-    };
-    console.log(numSet);
-
-    wx.showLoading({
-      title: '影片快速加载中',
-    });
-    for(let i = 0; i<numSet.size; i++){
-      this.getMovies(numSet[i]);
-      
-    }
-
-   
-  },
-
-  getMovies(id){
+  getMovieList(){
     qcloud.request({
-      url: config.service.movieDetail +id,
+      url: config.service.movieList,
 
       success: res => {
+        wx.hideLoading();
 
-        let data = res.data;       
+        let data = res.data;
+        // console.log(data.data);
+
+        if (!data.code) {
+          // 产生数组且去重
+          let numArray = [];
+          for (let i = 0; i < 10; i++) {
+            numArray[i] = Math.floor(Math.random() * 14);
+          };
+          let numSet = new Set(numArray);
+          numArray = Array.from(numSet)
+
+          //封装成需要的格式
+          let arr = [];
+          arr.push(data.data[numArray[0]], data.data[numArray[1]], data.data[numArray[2]]);
+          // console.log(arr);
+
           this.setData({
-            movies: data.data,
-        })
+            movies_list: arr,
+          });
+        } else {
+          wx.showToast({
+            title: '列表加载失败',
+          });
+        }
       },
 
       fail: () => {
-       
+        wx.hideLoading();
+
+        setTimeout(() => {
+          wx.showToast({
+            title: '列表加载失败',
+            icon: 'none'
+          });
+        })
       },
 
     });
+
   },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getHotMovieList();
+    this.getMovieList();
   },
 
   /**
@@ -112,7 +104,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getMovieList(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
   /**

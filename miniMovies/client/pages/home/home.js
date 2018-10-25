@@ -13,10 +13,26 @@ Page({
   data: {
     movies: {},
     movieId: 1,
+
+    comment_array: null,
   },
 
   /**
-   * 去到详情界面
+   * 去到影评详情页面
+   */
+  ToCommentDetail(e){
+    let comment_id = e.currentTarget.dataset.comment_id;
+    let imgSrc = this.data.movies.image;
+    let title = this.data.movies.title;
+
+    let pages = "/pages/comment/comment?imgSrc=" + imgSrc + "&title=" + title + "&id=" + comment_id;
+    wx.navigateTo({
+      url: pages,
+    })
+  },
+
+  /**
+   * 去到电影详情界面
    */
   ToDetail(e){
     console.log(e);
@@ -31,7 +47,8 @@ Page({
   getMovieData(){
     let movieId = Math.floor(Math.random() * (15 - 1) + 2);
     // console.log(movieId);
-
+    //获取评论
+    this.getCommentList(movieId);
     wx.showLoading({
       title: '影片快速加载中',
     });
@@ -67,8 +84,45 @@ Page({
         })
       },
 
-    });
+    }); 
+   
+  },
 
+  /**获取关于电影的评论 */
+  getCommentList(id) {
+   
+    qcloud.request({
+      url: config.service.commentOfMovie + id,
+
+      success: res => {
+        wx.hideLoading();
+        // console.log(res)
+        let data = res.data;
+        // console.log(data)
+        // console.log(data.data);
+        if (!data.code) {
+          this.setData({
+            comment_array: data.data
+          })
+        } else {
+          wx.showToast({
+            title: '推荐加载失败',
+          });
+        }
+      },
+
+      fail: () => {
+        wx.hideLoading();
+
+        setTimeout(() => {
+          wx.showToast({
+            title: '推荐加载失败',
+            icon: 'none'
+          });
+        })
+      },
+
+    })
   },
 
   /**
@@ -76,6 +130,7 @@ Page({
    */
   onLoad: function (options) {
     this.getMovieData();
+    
   },
 
   /**

@@ -45,7 +45,10 @@ var config = {
         getCommentByCommentId: `${host}/weapp/getCommentByCommentId/`,
 
         //收藏评论
-        mark_comment: `${host}/weapp/mark_comment/`
+        mark_comment: `${host}/weapp/mark`,
+
+        //查询评论是否被收藏
+        user_is_mark: `${host}/weapp/mark/`
     }
 };
 

@@ -51,6 +51,9 @@ router.get('/comments/:id', controllers.comments.getCommentOfMovie)
 router.get('/getCommentByCommentId/:id', controllers.getCommentByCommentId.getCommentByCommentId)
 
 //根据id收藏评论
-router.post('/mark/:id', validationMiddleware, controllers.mark.mark_comment)
+router.post('/mark', validationMiddleware, controllers.mark.mark_comment)
+
+//根据id查询是否被用户收藏过
+router.get('/mark/:id', validationMiddleware, controllers.mark.user_is_mark)
 
 module.exports = router

@@ -13,6 +13,7 @@ Page({
     imgSrc: null,
     title: null,
     comment_id: null,
+    isMark: 0,
   },
 
 
@@ -23,7 +24,8 @@ Page({
     let type = e.currentTarget.dataset.type;
     // console.log(type);
     let movieId = this.data.comment_detail[0].movie_id;
-    let comment_id = this.data.comment_detail[0].id;
+    // let comment_id = this.data.comment_detail[0].id;
+    // console.log('在收藏处',comment_id)
     // let imgSrc = this.data.movies_detail.image;
     // let title = this.data.movies_detail.title;
     // console.log(movieId);
@@ -31,7 +33,14 @@ Page({
 
     switch (type) {
       case 'mark_comment':
-        this.mark_comment(comment_id);
+        if(this.data.isMark == 0){
+          this.mark_comment();
+        } else {
+          wx.showToast({
+            title: '老子还没写完',
+          })
+        }
+        
         break;
 
       case 'add_comment':
@@ -53,28 +62,31 @@ Page({
   /**
    * 收藏影评
    */
-  mark_comment(comment_id){
+  mark_comment(){
     wx.showLoading({
       title: '收藏中',
     });
-
+    let id = this.data.comment_detail[0].id;
+    console.log(id);
     qcloud.request({
-      url: config.service.mark_comment + comment_id,
+      url: config.service.mark_comment,
       login: true,
       method: 'POST',
-      
       data: {
-        id: comment_id
+        id: id
       },
       success: res => {
+
         wx.hideLoading();
         wx.showToast({
           title: '收藏成功',
         })
-        wx.redirectTo({
-          url: '/pages/home/home',
-        })
+      
         console.log("mark successfully", res)
+        // console.log(res.data);
+        this.setData({
+          isMark: 1
+        })
       },
 
       fail: res => {
@@ -95,9 +107,32 @@ Page({
   /**
    * 判断是否收藏过
    */
-  // isMark(id){
-  //   qcloud.request
-  // }
+  isMark(id){
+    console.log(id)
+    qcloud.request({
+      url: config.service.user_is_mark + id,
+      login: true,
+      success: res => {
+        console.log("query success", res);
+        console.log(res.data.data[0]['count(*)']);
+        let comment_num = res.data.data[0]['count(*)'];
+        if (comment_num == 0) {
+          this.setData({
+            isMark: 0
+          })
+        } else {
+          this.setData({
+            isMark: 1
+          })
+        }
+      },
+
+      fail: res => {
+        console.log("query fail", res);
+      },
+
+    });
+  },
   
   /**
   * 播放音频
@@ -120,6 +155,7 @@ Page({
       comment_id: options.id
     });
     this.get_comment_detail(options.id);
+    this.isMark(options.id);
   },
 
   /**

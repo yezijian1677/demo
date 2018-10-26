@@ -21,7 +21,10 @@
       </view>
     </view>
     <view class='func-button'>
-      <view class='button' data-type='mark_comment' bindtap='markOrAdd'>收藏影评</view>
+      
+      <view wx:if='{{isMark == 0}}' class='button' data-type='mark_comment' bindtap='markOrAdd'>收藏影评</view>
+      <view wx:else class='button' data-type='mark_comment' bindtap='markOrAdd'>取消收藏</view>
+
       <view class='button' data-type='add_comment' bindtap='markOrAdd'>写影评</view>
     </view>
   </view>

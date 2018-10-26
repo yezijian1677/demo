@@ -28,7 +28,7 @@ module.exports = {
 
     }
 
-    ctx.state.data = {}
+    ctx.state.data = {id}
   },
 
   /**

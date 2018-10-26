@@ -32,9 +32,6 @@ var config = {
         //拉取用户信息
         user: `${host}/weapp/user`,
 
-        //获取我的影评收藏
-        markList: `${host}/weapp/mark`,
-
         //添加评论
         addComment: `${host}/weapp/comments`,
 
@@ -48,7 +45,17 @@ var config = {
         mark_comment: `${host}/weapp/mark`,
 
         //查询评论是否被收藏
-        user_is_mark: `${host}/weapp/mark/`
+        user_is_mark: `${host}/weapp/mark/`,
+
+        //移除收藏
+        remove_mark: `${host}/weapp/removeMark`,
+
+        //获取我的影评收藏
+        getStarMark: `${host}/weapp/getStarMark`,
+
+        //后去我发布的影评
+        getMyComment: `${host}/weapp/getMyComment`
+
     }
 };
 

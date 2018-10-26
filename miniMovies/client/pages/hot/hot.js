@@ -16,12 +16,17 @@ Page({
    * 获取电影列表
    */
   getMovieList(){
+    wx.showLoading({
+      title: '热门加载中...',
+    })
     qcloud.request({
       url: config.service.movieList,
 
       success: res => {
         wx.hideLoading();
-
+        wx.showToast({
+          title: '刷新成功',
+        });
         let data = res.data;
         // console.log(data.data);
 

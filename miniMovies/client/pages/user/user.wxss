@@ -1,3 +1,42 @@
+/*没有评论的时候*/
+.no-data-img {
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 300rpx;
+  margin-left: 275rpx;
+}
+.no-data-text {
+  font-size: 28rpx;
+  opacity: 0.7;
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+/* 播放 */
+.playButton {
+  display: flex;
+  background: #F8F9FB;
+  height: 60rpx;
+  width: 200rpx;
+  position: relative;
+}
+.play-svg {
+  margin-top: 12rpx;
+  margin-left: 20rpx;
+  height: 35rpx;
+  width: 35rpx;
+  margin-right: 10rpx;
+}
+.play {
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
+.play-card {
+  height: 100rpx;
+  width: 400rpx;
+}
+
+
 /* 未登录页面 */
 .allButton {
   display: flex;

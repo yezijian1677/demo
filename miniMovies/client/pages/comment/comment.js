@@ -36,9 +36,7 @@ Page({
         if(this.data.isMark == 0){
           this.mark_comment();
         } else {
-          wx.showToast({
-            title: '老子还没写完',
-          })
+          this.remove_mark();
         }
         
         break;
@@ -67,7 +65,7 @@ Page({
       title: '收藏中',
     });
     let id = this.data.comment_detail[0].id;
-    console.log(id);
+    // console.log(id);
     qcloud.request({
       url: config.service.mark_comment,
       login: true,
@@ -105,16 +103,61 @@ Page({
   },
 
   /**
+   * 移除收藏
+   */
+  remove_mark(){
+    wx.showLoading({
+      title: '取消收藏',
+    });
+    let id = this.data.comment_detail[0].id;
+    // console.log(id);
+    qcloud.request({
+      url: config.service.remove_mark,
+      login: true,
+      method: 'POST',
+      data: {
+        id: id
+      },
+      success: res => {
+
+        wx.hideLoading();
+        wx.showToast({
+          title: '移除成功',
+        })
+
+        console.log("remove_mark successfully", res)
+        // console.log(res.data);
+        this.setData({
+          isMark: 0
+        })
+      },
+
+      fail: res => {
+        wx.hideLoading();
+
+        console.log("remove_mark fail", res)
+        setTimeout(() => {
+          wx.showToast({
+            title: '移除失败',
+            icon: 'none'
+          });
+        })
+      },
+
+    });
+  },
+
+  /**
    * 判断是否收藏过
    */
   isMark(id){
-    console.log(id)
+    // console.log(id)
     qcloud.request({
       url: config.service.user_is_mark + id,
       login: true,
       success: res => {
         console.log("query success", res);
-        console.log(res.data.data[0]['count(*)']);
+        // console.log(res.data.data[0]['count(*)']);
         let comment_num = res.data.data[0]['count(*)'];
         if (comment_num == 0) {
           this.setData({
@@ -163,7 +206,7 @@ Page({
    * 
    */
   get_comment_detail(id){
-    console.log("this is comment",id)
+    // console.log("this is comment",id)
     wx.showLoading({
       title: '评论加载中',
     })

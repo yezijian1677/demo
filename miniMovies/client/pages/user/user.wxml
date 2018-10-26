@@ -27,24 +27,36 @@
 
     <!-- 选择收藏的影评或者我的影评 -->
     <view class='header' bindtap='onTapSwitchType' data-type='{{headerType}}'>
-      <view class='header-text'>{{headerType ? '收藏的影评' : '我的影评'}}</view>
+      <view class='header-text'>{{headerType ? '我的影评' : '收藏的影评'}}</view>
       <view class='header-down'>v</view>
     </view>
 
     <!-- 收藏评论卡 -->
-    <scroll-view scroll-y wx:if='{{comment_test.length > 0}}' class='all-card'>
-        <view wx:for='{{comment_test}}' wx:key='id' class='star-card'>
-          <image class='card-img' src='{{item.image}}'></image>
+    <scroll-view scroll-y wx:if='{{comment_list.length > 0}}' class='all-card'>
+        <view wx:for='{{comment_list}}' wx:key='{{item.id}}' class='star-card'>
+          <image class='card-img' src='{{item.image}}' bindtap='to_comment_detail' data-comment_id='{{item.id}}' data-imgsrc='{{item.image}}' data-title='{{item.title}}'></image>
           <view class='card-right'>
-            <view class='card-name'>{{item.name}}</view>
-            <view class='card-comment'>{{item.comment}}</view>
+            <view class='card-name'>{{item.title}}</view>
+            <view wx:if='{{item.type == 0}}'>
+              <view class='card-comment'>{{item.content}}</view>
+            </view>
+            <view wx:else class='play-card'>
+              <view class='playButton' bindtap='play_record' data-url='{{item.content}}'>
+                <image class='play-svg' src='../../img-mini/playNow.svg'></image>
+                <view class='play'>播放音频</view>
+              </view>
+            </view>
             <view class='user'>
               <image class='card-avatar' src='{{item.avatar}}'></image>
-              <view class='card-userName'>{{item.userName}}</view>
+              <view class='card-userName'>{{item.username}}</view>
             </view>
           </view>
         </view>
     </scroll-view>
+    <view wx:else class='all-card'>
+      <image src='../../img-mini/order.png' class='no-data-img'></image>
+      <view class='no-data-text'>没有收藏评论噢</view>
+    </view>
 
   </view>
 

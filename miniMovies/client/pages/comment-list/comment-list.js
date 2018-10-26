@@ -25,7 +25,7 @@ Page({
 
   /**转至影评详情 */
   to_comment_detail(e){
-    console.log(e);
+    // console.log(e);
     let id = e.currentTarget.id;
     let imgSrc = this.data.imgSrc;
     let title = this.data.tilte;
@@ -40,7 +40,7 @@ Page({
    */
   play_record(e){
     let url = e.currentTarget.dataset.url;
-    console.log(url);
+    // console.log(url);
     let innerAudioContext = wx.createInnerAudioContext();
     innerAudioContext.src = url;
     innerAudioContext.play();
@@ -73,8 +73,8 @@ Page({
         wx.hideLoading();
         console.log(res)
         let data = res.data;
-        console.log(data)
-        console.log(data.data);
+        // console.log(data)
+        // console.log(data.data);
         if (!data.code) {
           this.setData({
             comment_array: data.data

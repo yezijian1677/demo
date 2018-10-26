@@ -39,7 +39,7 @@ router.get('/movies',controllers.movies.list)
 router.get('/movies/:id', controllers.movies.detail)
 
 //获取我收藏的影评
-router.get('/mark', validationMiddleware, controllers.mark.user_star_comment)
+router.get('/getStarMark', validationMiddleware, controllers.getStarMark.user_star_comment)
 
 //添加评论
 router.post('/comments', validationMiddleware, controllers.comments.add)
@@ -55,5 +55,11 @@ router.post('/mark', validationMiddleware, controllers.mark.mark_comment)
 
 //根据id查询是否被用户收藏过
 router.get('/mark/:id', validationMiddleware, controllers.mark.user_is_mark)
+
+//移除收藏
+router.post('/removeMark', validationMiddleware, controllers.removeMark.remove_mark_comment)
+
+//获取我的评论
+router.get('/getMyComment', validationMiddleware, controllers.getMyComment.my_comment)
 
 module.exports = router

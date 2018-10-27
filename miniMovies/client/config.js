@@ -53,8 +53,14 @@ var config = {
         //获取我的影评收藏
         getStarMark: `${host}/weapp/getStarMark`,
 
-        //后去我发布的影评
-        getMyComment: `${host}/weapp/getMyComment`
+        //获去我发布的影评
+        getMyComment: `${host}/weapp/getMyComment`,
+
+        //查询是否发布过影评
+        user_is_comment: `${host}/weapp/user_is_comment/`,
+
+        //查询我发布影评的id
+        query_my_comment_id: `${host}/weapp/query_my_comment_id/`
 
     }
 };

@@ -62,4 +62,10 @@ router.post('/removeMark', validationMiddleware, controllers.removeMark.remove_m
 //获取我的评论
 router.get('/getMyComment', validationMiddleware, controllers.getMyComment.my_comment)
 
+//查询是否发布过影评
+router.get('/user_is_comment/:id', validationMiddleware, controllers.user_is_comment.user_is_comment)
+
+//查询我的评论的id
+router.get('/query_my_comment_id/:id', validationMiddleware, controllers.query_my_comment_id.my_id)
+
 module.exports = router

@@ -14,6 +14,58 @@ Page({
     title: null,
     comment_id: null,
     isMark: 0,
+    isComment:0,
+    my_comment_id: 0,
+  },
+
+  /**
+   * 查询用户是否评论过
+   */
+  user_is_comment(id){
+    qcloud.request({
+      url: config.service.user_is_comment + id,
+      login: true,
+      success: res => {
+        console.log("is_comment_query success", res);
+        // console.log(res.data.data[0]['count(*)']);
+        let comment_num = res.data.data[0]['count(*)'];
+        if (comment_num == 0) {
+          this.setData({
+            isComment: 0
+          })
+        } else {
+          this.setData({
+            isComment: 1
+          })
+        }
+      },
+
+      fail: res => {
+        console.log("is_comment_query fail", res);
+      },
+
+    });
+  },
+  /**
+   * 查询我的评论id
+   */
+  my_comment_id(id) {
+    let movieId = this.data.movie_id;
+    qcloud.request({
+      url: config.service.query_my_comment_id + id,
+      login: true,
+      success: res => {
+        console.log("my_comment_query success", res.data.data[0].id);
+        this.setData({
+          my_comment_id: res.data.data[0].id
+        })
+      },
+
+      fail: res => {
+        console.log("my_comment_query fail", res);
+      },
+
+    });
   },
 
 
@@ -42,21 +94,41 @@ Page({
         break;
 
       case 'add_comment':
-        pages += "edit_comment/edit_comment?id=" + movieId;
-        wx.showActionSheet({
-          itemList: ["文字", "录音"],
-          success: res => {
-            // console.log(res.tapIndex);
-            pages += "&comment_type=" + res.tapIndex;
-            console.log(pages);
-            wx.navigateTo({
-              url: pages,
-            });
-          }
-        });
+        if(this.data.isComment == 0){
+          pages += "edit_comment/edit_comment?id=" + movieId;
+          wx.showActionSheet({
+            itemList: ["文字", "录音"],
+            success: res => {
+              // console.log(res.tapIndex);
+              pages += "&comment_type=" + res.tapIndex;
+              console.log(pages);
+              wx.navigateTo({
+                url: pages,
+              });
+            }
+          });
+        } else {
+          this.to_comment_detail();
+        }
+        
         break;
     }
   },
+
+  /**转至我的影评详情 */
+  to_comment_detail(e) {
+    // console.log(e);
+    let id = this.data.my_comment_id;
+    console.log(id);
+    let imgSrc = this.data.imgSrc;
+    let title = this.data.title;
+
+    let pages = "/pages/comment/comment?imgSrc=" + imgSrc + "&title=" + title + "&id=" + id;
+    wx.navigateTo({
+      url: pages,
+    })
+  },
+
   /**
    * 收藏影评
    */
@@ -195,10 +267,11 @@ Page({
     this.setData({
       imgSrc: options.imgSrc,
       title: options.title,
-      comment_id: options.id
+      comment_id: options.id,
     });
     this.get_comment_detail(options.id);
     this.isMark(options.id);
+    this.user_is_comment(options.id);
   },
 
   /**
@@ -218,10 +291,12 @@ Page({
         // console.log("in getcomment detail",res)
         let data = res.data;
         // console.log(data)
-        // console.log('thissss',data.data);
+        // console.log('thissss',data.data[0].movie_id);
+        let movie_id = data.data[0].movie_id
+        this.my_comment_id(movie_id);
         if (!data.code) {
           this.setData({
-            comment_detail: data.data
+            comment_detail: data.data,
           })
         } else {
           wx.showToast({

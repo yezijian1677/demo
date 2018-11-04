@@ -1,0 +1,20 @@
+<swiper indicator-dots="true"
+  autoplay="true" interval="2000" duration="500" circular='true' class='swiper'>
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" mode='aspectFit' style='width: 750rpx; height:400rpx;'/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<scroll-view scroll-y>
+  <view wx:for='{{product_list}}'>
+    <view class='product_card'>
+      <view class='product_card_left'>
+        <view class='name'>{{item.name}}</view>
+        <view class='charater_short'>{{item.charater_short}}</view>
+      </view>
+      <image src='{{item.img}}' class='img' mode='aspectFill' style='width:200rpx;height:250rpx;'></image>
+    </view>
+  </view>
+</scroll-view>

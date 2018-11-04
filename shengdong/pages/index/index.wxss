@@ -1,0 +1,15 @@
+.swiper {
+  height: 400rpx;
+  width: 750rpx;
+}
+.product_card {
+  height: 200;
+  display: flex;
+}
+.product_card_left {
+  height: 300rpx;
+  width: 550rpx;
+}
+.name {
+  
+}
